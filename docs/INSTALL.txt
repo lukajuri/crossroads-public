@@ -1,0 +1,42 @@
+CROSSROADS: YOUR FIRST BRIEFING
+Installation for lukajuri.eu / cPanel
+
+1. Create a NEW public folder for this game, separate from Operation Crossroads.
+   Upload the CONTENTS of this archive's public/ folder into that game folder.
+   index.html, app.js, engine.js, styles.css, data/, assets/ and api/ belong
+   together. Open the game URL over HTTPS, not by double-clicking index.html.
+
+2. The game, all eight missions and career debriefs work immediately.
+   No login, API key or installation is needed for players.
+
+OPTIONAL AI MENTOR
+
+3. Create /home/margar38/crossroads-public-private OUTSIDE public_html.
+   Upload the CONTENTS of this archive's crossroads-public-private/ folder
+   there. Do not upload that private folder into the game's public folder.
+
+4. Rename config.example.php to config.php IN THE PRIVATE FOLDER.
+   It reads your existing API key and model from
+   /home/margar38/crossroads-private/config.php.
+   You do not need to paste the key again or change your classroom game.
+
+5. Use PHP 8.1 or later with curl enabled. PHP must be able to read the private
+   files and create /home/margar38/crossroads-public-private/cache.
+   When PHP runs as your cPanel account, owner permissions 700 on the private
+   folder normally suffice. Do not use 777.
+
+6. Open YOUR-GAME-URL/api/mentor.php?status=1.
+   configured:true checks configuration, not OpenAI model access or billing.
+   Complete a mission and click Ask your AI mentor to test a real response.
+   A visible message stays on screen while feedback is being prepared.
+
+If your host terminates HTTPS at a proxy, and a request gets rejected as a
+cross-origin request, add this setting in private config.php:
+    'public_origin' => 'https://lukajuri.eu',
+Use the actual origin of your game if different.
+
+Do not upload this entire source repository into public_html.
+Keep server code, config, cache, tests and project documents outside webroot.
+Full guide: docs/AI-SETUP.md in GitHub.
+Repository: https://github.com/lukajuri/crossroads-public
+Programme: https://emuni.si/mgg/

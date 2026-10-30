@@ -1,0 +1,6 @@
+*.webp binary
+*.ttf binary
+*.zip binary
+*.js text eol=lf
+*.json text eol=lf
+*.php text eol=lf

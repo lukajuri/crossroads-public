@@ -1,0 +1,9 @@
+node_modules/
+.env
+server/config.php
+crossroads-public-private/
+cache/
+artifacts/
+.openai/
+
+/public/__qa.html

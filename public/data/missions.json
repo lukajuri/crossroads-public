@@ -1,0 +1,1234 @@
+[
+  {
+    "id": "koper",
+    "title": "The Koper Warning",
+    "kicker": "A port. A warning. Your first call.",
+    "location": "Koper, Slovenia",
+    "coordinates": [
+      45.55,
+      13.73
+    ],
+    "category": "Security & trade",
+    "role": "Geopolitical risk analyst",
+    "teaser": "A credible warning reaches a busy port. Help protect people without bringing essential trade to a standstill.",
+    "assignment": "Investigators have uncovered a possible drone attack on the Port of Koper. No attack has occurred. A safety hold is in place in one area, and an angry crowd wants answers. Your team needs advice on the investigation, public communication and traffic.",
+    "supervisor": "Start with what we can establish. Then recommend a practical next step. You do not have to solve the whole crisis.",
+    "stakes": [
+      "Port workers",
+      "Local residents",
+      "Shippers & rail operators"
+    ],
+    "concept": {
+      "term": "Geopolitical risk",
+      "definition": "How political events and tensions can affect people, organisations and the places connecting them."
+    },
+    "sources": [
+      {
+        "id": "s1",
+        "title": "Incident desk",
+        "kind": "Verified update",
+        "excerpt": "Two independent records support a real drone threat. Investigators have not identified the organisers or a foreign sponsor. The incident authority has restricted one terminal area.",
+        "context": "Direct update from the investigation.",
+        "insight": "A credible threat justifies protective action; it does not identify who directed it."
+      },
+      {
+        "id": "s2",
+        "title": "The viral image",
+        "kind": "Social post",
+        "excerpt": "A widely shared photo claims an attack has already happened. Its original upload shows routine maintenance six months earlier. Residents are gathering outside the port.",
+        "context": "Image date checked against the original upload.",
+        "insight": "The photo is misleading, but the concern of residents is real."
+      },
+      {
+        "id": "s3",
+        "title": "Tomorrow’s deliveries",
+        "kind": "Operations note",
+        "excerpt": "Rail traffic through unaffected areas can continue with additional checks. A full port closure would also delay medical supplies and food.",
+        "context": "The traffic plan is subject to the incident authority’s safety decisions.",
+        "insight": "Different traffic can face different risks and different protective measures."
+      }
+    ],
+    "question": {
+      "prompt": "Which statement can your team support right now?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The warning is real, but the circulating photo does not show an attack today.",
+          "feedback": "You separated two claims. A genuine threat and a misleading image can exist at the same time.",
+          "quality": 2
+        },
+        {
+          "id": "b",
+          "text": "The old photo makes the entire warning too doubtful to act on.",
+          "feedback": "The image is misleading, but the independent investigation still supports protective action.",
+          "quality": 0
+        },
+        {
+          "id": "c",
+          "text": "Protective action is needed, and the foreign sponsor should be named as likely.",
+          "feedback": "Protection is justified. Naming a sponsor would go beyond the evidence currently available.",
+          "quality": 1
+        }
+      ],
+      "best": "a"
+    },
+    "choices": [
+      {
+        "id": "targeted",
+        "title": "Protect the affected area",
+        "description": "Support targeted checks, evidence collection and a verified public update while authorised traffic continues.",
+        "tradeoff": "Additional checks create queues and require staff.",
+        "consequence": "Investigators retain access to the affected area. Priority cargo moves under authorised checks, and residents receive a clear update about known facts and open questions.",
+        "quality": 2
+      },
+      {
+        "id": "pause",
+        "title": "Request a port-wide pause",
+        "description": "Ask the incident authority to consider pausing all traffic until the warning has been examined further.",
+        "tradeoff": "A wider precaution also delays unaffected cargo.",
+        "consequence": "The authority reviews your request. A broad pause buys caution but holds food and medical shipments too; the team must explain its scope and review time.",
+        "quality": 1
+      },
+      {
+        "id": "quiet",
+        "title": "Limit the public statement",
+        "description": "Maintain the existing safety hold and let investigators work before issuing a detailed statement.",
+        "tradeoff": "An information gap can leave rumours unanswered.",
+        "consequence": "The investigation continues, but the misleading photo keeps spreading. Residents ask why the team has not corrected a claim it can already disprove.",
+        "quality": 1
+      }
+    ],
+    "development": {
+      "title": "A second piece of the puzzle",
+      "text": "Investigators link a purchased drone component to the plot. The purchase is confirmed, but the buyer’s contacts remain unverified. Meanwhile, a local video shows authorised trains moving safely through an unaffected route.",
+      "question": "How should your advice change?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Announce that the component proves a foreign government ordered the plot.",
+          "feedback": "The component advances the investigation. It still does not establish a government sponsor.",
+          "quality": 0
+        },
+        {
+          "id": "b",
+          "text": "Keep targeted protection, investigate the purchase and update the public on verified traffic.",
+          "feedback": "You updated the plan using new evidence while keeping the attribution question open.",
+          "quality": 2
+        },
+        {
+          "id": "c",
+          "text": "Keep the original advice exactly as it was until every detail is known.",
+          "feedback": "You can preserve caution while still using the new evidence to improve your advice.",
+          "quality": 1
+        }
+      ]
+    },
+    "briefingPrompt": "Recommend how to protect people, continue the investigation and communicate what is known. Mention one cost or uncertainty.",
+    "careers": [
+      {
+        "id": "risk",
+        "title": "Geopolitical risk analyst",
+        "task": "Brief a shipping company on how the incident could affect its routes and staff.",
+        "appeal": "Your research can help people make practical decisions on a difficult morning.",
+        "skill": "Connecting local events to wider business exposure"
+      },
+      {
+        "id": "diplomacy",
+        "title": "Diplomatic adviser",
+        "task": "Prepare a factual briefing that supports cooperation without making an unsupported accusation.",
+        "appeal": "You work where careful words and international relationships matter.",
+        "skill": "Separating confirmed conduct from attribution"
+      },
+      {
+        "id": "strategy",
+        "title": "Geopolitical strategist",
+        "task": "Compare what a short disruption or a prolonged security alert would mean for Adriatic trade.",
+        "appeal": "You explore several possible futures and help others prepare.",
+        "skill": "Building and comparing future scenarios"
+      }
+    ],
+    "courses": [
+      "Research Methodology and Analytical Tools",
+      "International Trade, Logistics and Transport"
+    ],
+    "takeaway": "Good advice can protect people, preserve useful connections and admit what remains unknown."
+  },
+  {
+    "id": "fimi",
+    "title": "The Borrowed Bulletin",
+    "kicker": "One altered notice. Thousands of reactions.",
+    "location": "Alexandria, Egypt",
+    "coordinates": [
+      31.2,
+      29.92
+    ],
+    "category": "Information & influence",
+    "role": "Information analyst",
+    "teaser": "A convincing port announcement spreads online. Discover what was changed, who amplified it and why people believe it.",
+    "assignment": "A notice carrying a port seal claims food imports will stop for a month. Traders cancel bookings, and residents are angry. The original concerns office opening hours. Your team must correct the manipulation while taking real delivery problems seriously.",
+    "supervisor": "Look at the original before the reactions. A false notice does not mean every complaint is false.",
+    "stakes": [
+      "Food traders",
+      "Residents",
+      "Port administration"
+    ],
+    "concept": {
+      "term": "FIMI",
+      "definition": "Foreign information manipulation and interference: organised attempts from abroad to distort information and influence public decisions."
+    },
+    "sources": [
+      {
+        "id": "s1",
+        "title": "The archived notice",
+        "kind": "Original document",
+        "excerpt": "The port archive lists inspection-office opening hours. It contains no month-long import suspension. The altered version copies the seal and layout.",
+        "context": "Original obtained from the official document archive.",
+        "insight": "A familiar design can make changed content look official."
+      },
+      {
+        "id": "s2",
+        "title": "The sharing pattern",
+        "kind": "Research note",
+        "excerpt": "Several accounts share the altered document within seconds of each other. Independent records link the cluster to a foreign commercial operator. Government involvement has not been established.",
+        "context": "Connection checked using more than shared opinions.",
+        "insight": "Coordinated behaviour can be evidenced separately from a claim of state sponsorship."
+      },
+      {
+        "id": "s3",
+        "title": "At the market",
+        "kind": "Local reporting",
+        "excerpt": "Traders describe genuine delays at the inspection office. Families worry about prices. Some people shared the notice because it seemed to explain problems they had already experienced.",
+        "context": "Interviews include traders who did not share the altered notice.",
+        "insight": "Manipulation can gain traction by attaching itself to real frustrations."
+      }
+    ],
+    "question": {
+      "prompt": "What is the strongest conclusion from these sources?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every account criticising the port belongs to the coordinated campaign.",
+          "feedback": "Criticism alone does not establish participation. The sources show legitimate complaints as well as manipulation.",
+          "quality": 0
+        },
+        {
+          "id": "b",
+          "text": "The notice was altered and amplified by a linked cluster; the delivery complaints need their own answer.",
+          "feedback": "You followed the document trail without dismissing the people affected by real delays.",
+          "quality": 2
+        },
+        {
+          "id": "c",
+          "text": "The port should correct the notice, although the sharing pattern cannot tell us anything useful.",
+          "feedback": "Correction matters. The independently linked pattern also provides evidence worth investigating.",
+          "quality": 1
+        }
+      ],
+      "best": "b"
+    },
+    "choices": [
+      {
+        "id": "correct",
+        "title": "Show the original and fix the gap",
+        "description": "Publish a clear comparison, notify affected traders and explain what is being done about real inspection delays.",
+        "tradeoff": "A useful correction takes staff and repeated updates.",
+        "consequence": "Traders can compare the two documents and revisit bookings. Residents receive both a correction and a named contact for the actual delivery problem.",
+        "quality": 2
+      },
+      {
+        "id": "platforms",
+        "title": "Start with the distributors",
+        "description": "Send the documented cluster to relevant investigators and platforms before launching a wider public response.",
+        "tradeoff": "The false claim may keep circulating meanwhile.",
+        "consequence": "The evidence trail is preserved and investigated. Some traders still act on the notice because they have not yet seen a clear correction.",
+        "quality": 1
+      },
+      {
+        "id": "official",
+        "title": "Issue a brief official denial",
+        "description": "State that imports remain open and direct people to the official port website.",
+        "tradeoff": "A denial alone may not explain why people were misled.",
+        "consequence": "The official position becomes clear, but people keep asking about the copied seal and their genuine delays. A comparison and practical follow-up are still needed.",
+        "quality": 1
+      }
+    ],
+    "development": {
+      "title": "The correction is travelling too",
+      "text": "Corrected copies now reach many traders. But a new interview confirms that inspection delays are still causing losses. The coordinating operator is identified; no evidence establishes government direction.",
+      "question": "What should the next update emphasise?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The correction worked, so the team can close the entire issue.",
+          "feedback": "The altered notice is only part of the problem. Real delays still affect people’s decisions.",
+          "quality": 1
+        },
+        {
+          "id": "b",
+          "text": "The operator’s location proves that its government directed the campaign.",
+          "feedback": "Location is not evidence of government direction. Those are separate claims.",
+          "quality": 0
+        },
+        {
+          "id": "c",
+          "text": "Report what is established, keep investigating coordination and give a concrete update on delivery delays.",
+          "feedback": "You treat manipulation and legitimate concerns as connected issues requiring different evidence.",
+          "quality": 2
+        }
+      ]
+    },
+    "briefingPrompt": "Explain what was manipulated, how you would help people make reliable decisions and what remains unproven.",
+    "careers": [
+      {
+        "id": "information",
+        "title": "Information analyst",
+        "task": "Compare documents, verify images and trace how a claim moves between communities.",
+        "appeal": "A small detail can change how a whole story is understood.",
+        "skill": "Source verification and tracing influence"
+      },
+      {
+        "id": "communications",
+        "title": "Strategic communications adviser",
+        "task": "Help an institution explain verified facts in language people can use.",
+        "appeal": "You translate complex findings into a response that reaches real audiences.",
+        "skill": "Audience awareness and clear public explanation"
+      },
+      {
+        "id": "diplomacy",
+        "title": "Diplomatic adviser",
+        "task": "Explain the cross-border evidence without overstating who directed the activity.",
+        "appeal": "You connect public information to sensitive international relationships.",
+        "skill": "Calibrating claims about responsibility"
+      }
+    ],
+    "courses": [
+      "Geopolitics and Narrative",
+      "Research Methodology and Analytical Tools"
+    ],
+    "takeaway": "Checking a claim works best when you also understand the people it reached."
+  },
+  {
+    "id": "water",
+    "title": "The Neretva Bargain",
+    "kicker": "One river. Different needs.",
+    "location": "Neretva basin, Bosnia and Herzegovina & Croatia",
+    "coordinates": [
+      43.06,
+      17.66
+    ],
+    "category": "Resources & negotiation",
+    "role": "Resources and negotiation adviser",
+    "teaser": "Help two countries share a river when drinking water, farming and electricity need it at different times.",
+    "assignment": "An upstream energy team in Bosnia and Herzegovina and downstream users in Croatia disagree about a water-release schedule. The daily total looks sufficient, yet a drinking-water intake struggles during low-flow hours. Your job is to find a workable next agreement.",
+    "supervisor": "Ask when water is needed, not just how much. A good arrangement must be practical for both sides.",
+    "stakes": [
+      "Households",
+      "Delta farmers",
+      "Electricity users"
+    ],
+    "concept": {
+      "term": "Shared resource",
+      "definition": "Something people depend on across borders, so one place’s decisions can change another place’s access."
+    },
+    "sources": [
+      {
+        "id": "s1",
+        "title": "The power schedule",
+        "kind": "Energy desk",
+        "excerpt": "The upstream operator releases much of the day’s water during evening electricity demand. Moving releases earlier would reduce the value of some power sales.",
+        "context": "Proposed schedule for this fictional operating window.",
+        "insight": "Changing timing has a real cost for electricity production."
+      },
+      {
+        "id": "s2",
+        "title": "At the drinking-water intake",
+        "kind": "Municipal log",
+        "excerpt": "Water levels fall during the morning intake window. Salt readings then rise, making treatment harder. The daily flow total does not show this shortfall.",
+        "context": "Measurements taken during the critical hours.",
+        "insight": "A daily average can hide a problem at the time people need the resource."
+      },
+      {
+        "id": "s3",
+        "title": "The growers’ request",
+        "kind": "Farmers’ note",
+        "excerpt": "Delta farms need predictable irrigation hours. They can shift some watering if they receive reliable notice, but sudden changes damage crops and waste labour.",
+        "context": "Requests cover the coming operating period.",
+        "insight": "Predictability can help people adapt, even when nobody receives everything they want."
+      }
+    ],
+    "question": {
+      "prompt": "Why can enough water over a full day still leave people short?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The two teams may be measuring water at different places along the river.",
+          "feedback": "Measurement locations can matter. Here the hourly intake log already identifies a timing and water-quality problem.",
+          "quality": 1
+        },
+        {
+          "id": "b",
+          "text": "The daily total must be too small, so a larger volume is the only solution.",
+          "feedback": "The sources indicate sufficient daily volume. Changing when water arrives may help without relying only on a larger total.",
+          "quality": 0
+        },
+        {
+          "id": "c",
+          "text": "Water arrives outside the hours when the intake and farms need dependable flow.",
+          "feedback": "You noticed the practical link between timing, water quality and people’s needs.",
+          "quality": 2
+        }
+      ],
+      "best": "c"
+    },
+    "choices": [
+      {
+        "id": "joint",
+        "title": "Agree a timed trial together",
+        "description": "Protect the drinking-water window, schedule irrigation, share hourly readings and review the energy cost after a short trial.",
+        "tradeoff": "The power operator gives up some peak-time revenue.",
+        "consequence": "Both teams can check the same hourly record. Essential intake conditions improve, growers can plan, and the trial makes the energy cost visible for negotiation.",
+        "quality": 2
+      },
+      {
+        "id": "volume",
+        "title": "Agree only a higher daily volume",
+        "description": "Ask the upstream team to release more water each day while retaining its preferred operating hours.",
+        "tradeoff": "Extra water may still arrive at the wrong time.",
+        "consequence": "The headline total increases. Morning intake difficulties may continue, so the teams still need a timed schedule and a way to verify its effects.",
+        "quality": 1
+      },
+      {
+        "id": "intake",
+        "title": "Protect the intake first",
+        "description": "Request an immediate schedule focused on drinking water while postponing the irrigation and energy bargain.",
+        "tradeoff": "Other users need a clear timetable for their own agreement.",
+        "consequence": "Essential access receives priority. Farmers and the power team support an urgent measure but press for a review so a temporary arrangement does not become open-ended.",
+        "quality": 1
+      }
+    ],
+    "development": {
+      "title": "Rain is coming. The timing is uncertain.",
+      "text": "A new forecast suggests rain later in the week. This may improve flows, but the municipal intake still faces a low-flow morning tomorrow. Both teams offer to share hourly readings.",
+      "question": "What is the most useful next step?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep tomorrow’s protection, share readings and set a review when the forecast becomes clearer.",
+          "feedback": "You use the forecast as new information without treating uncertain rain as water already available.",
+          "quality": 2
+        },
+        {
+          "id": "b",
+          "text": "Cancel the agreement because the coming rain will solve the shortage.",
+          "feedback": "The forecast may help later. It does not protect tomorrow morning’s intake.",
+          "quality": 0
+        },
+        {
+          "id": "c",
+          "text": "Keep the emergency arrangement indefinitely so nobody needs to negotiate again.",
+          "feedback": "Protection matters, but new readings and changing conditions should lead to a planned review.",
+          "quality": 1
+        }
+      ]
+    },
+    "briefingPrompt": "Propose a water-sharing step, explain who benefits and who accepts a cost, and say when the arrangement should be reviewed.",
+    "careers": [
+      {
+        "id": "resources",
+        "title": "Resources analyst",
+        "task": "Combine water, farming and energy information to explain how the system fits together.",
+        "appeal": "You work on questions that connect everyday life to international decisions.",
+        "skill": "Reading connections across sectors"
+      },
+      {
+        "id": "negotiation",
+        "title": "Negotiation adviser",
+        "task": "Prepare options that let both sides see what they gain and what they give up.",
+        "appeal": "You help turn competing demands into an agreement people can use.",
+        "skill": "Designing workable compromises"
+      },
+      {
+        "id": "strategy",
+        "title": "Geopolitical strategist",
+        "task": "Explore how drought, energy demand or new infrastructure could change cooperation over time.",
+        "appeal": "You look beyond tomorrow’s dispute to the choices shaping the next decade.",
+        "skill": "Long-term resource scenarios"
+      }
+    ],
+    "courses": [
+      "Geopolitics of Resources, Maritime Space and the Deep Sea",
+      "Reading and Resolving Conflict: Negotiation Techniques and Cognitive Processes"
+    ],
+    "takeaway": "Sharing a resource means negotiating timing, trust and costs as well as totals."
+  },
+  {
+    "id": "canal",
+    "title": "The Silent Canal",
+    "kicker": "A narrow passage. A wide ripple.",
+    "location": "Suez Canal, Egypt",
+    "coordinates": [
+      30.6,
+      32.33
+    ],
+    "category": "Trade & logistics",
+    "role": "Trade and logistics adviser",
+    "teaser": "A canal stoppage turns one route into many difficult choices. Decide which deliveries need attention first.",
+    "assignment": "A navigation-system failure has stopped a Suez convoy. Ships linking the Mediterranean and Indian Ocean are waiting. Your client carries refrigerated food and factory components. Compare waiting with a longer route, then explain whose delivery is most exposed.",
+    "supervisor": "A route can be open and still be too slow for a particular shipment. Look at the cargo, not just the line on the map.",
+    "stakes": [
+      "Ship crews",
+      "Food importers",
+      "Factory workers"
+    ],
+    "concept": {
+      "term": "Chokepoint",
+      "definition": "A narrow passage used by many routes, where one interruption can affect a much larger network."
+    },
+    "sources": [
+      {
+        "id": "s1",
+        "title": "Canal control",
+        "kind": "Operations update",
+        "excerpt": "Passage is paused after a navigation-system failure. Engineers are checking the fault. There is no reliable reopening time yet.",
+        "context": "The cause is being examined; a reopening estimate is not confirmed.",
+        "insight": "Planning should recognise that the duration is uncertain."
+      },
+      {
+        "id": "s2",
+        "title": "Two cargo clocks",
+        "kind": "Cargo note",
+        "excerpt": "Refrigerated fruit has a short selling window. The sealed factory components can tolerate several more days, but the receiving factory has little spare stock.",
+        "context": "Both shipments matter for different reasons.",
+        "insight": "Cargo urgency depends on spoilage, stocks and the next handover."
+      },
+      {
+        "id": "s3",
+        "title": "The alternative route",
+        "kind": "Routing offer",
+        "excerpt": "A route around southern Africa avoids the canal but adds substantial travel time and fuel cost. Available onward rail slots also need confirmation.",
+        "context": "The offer shows a possible path, not a completed delivery plan.",
+        "insight": "A longer line on a map needs workable connections and enough time."
+      }
+    ],
+    "question": {
+      "prompt": "Which detail most helps decide what to do with each shipment?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whether the cargo can still arrive in time and whether its onward connections are available.",
+          "feedback": "You looked at usable delivery, including time and handovers.",
+          "quality": 2
+        },
+        {
+          "id": "b",
+          "text": "Which route looks shortest on a world map.",
+          "feedback": "Distance matters, but a short closed route and an unconfirmed transfer cannot deliver cargo.",
+          "quality": 0
+        },
+        {
+          "id": "c",
+          "text": "Whether another ship has already chosen the alternative.",
+          "feedback": "That can provide a clue, but its cargo, fuel and onward connections may differ.",
+          "quality": 1
+        }
+      ],
+      "best": "a"
+    },
+    "choices": [
+      {
+        "id": "split",
+        "title": "Make a cargo-by-cargo plan",
+        "description": "Check the food’s remaining window, reserve verified onward slots and prepare rerouting for shipments that cannot safely wait.",
+        "tradeoff": "Separate plans take coordination and may cost more.",
+        "consequence": "The most time-sensitive deliveries receive attention first. Other cargo waits with a review point, and the client sees why one answer does not suit every shipment.",
+        "quality": 2
+      },
+      {
+        "id": "reroute",
+        "title": "Reroute the whole shipment list",
+        "description": "Recommend the alternative sea route to reduce dependence on an uncertain reopening.",
+        "tradeoff": "The longer voyage may miss the food’s selling window.",
+        "consequence": "The client gains a route outside the canal. It must now check refrigeration, extra fuel and onward bookings before treating the detour as a delivery solution.",
+        "quality": 1
+      },
+      {
+        "id": "wait",
+        "title": "Wait with a clear review time",
+        "description": "Keep ships ready for canal reopening and check cargo conditions while engineers investigate.",
+        "tradeoff": "A longer stoppage could use up the remaining food window.",
+        "consequence": "Unnecessary detours are avoided for now. The advice remains workable only if cargo conditions are monitored and the team is ready to change course at the review.",
+        "quality": 1
+      }
+    ],
+    "development": {
+      "title": "A route opens. A connection fills.",
+      "text": "Canal engineers report progress but still cannot promise a reopening time. The alternative port confirms a limited rail slot for the factory components. No suitable slot is available there for the refrigerated food.",
+      "question": "What does this change?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The alternative is now confirmed for every type of cargo.",
+          "feedback": "One confirmed slot does not establish a complete route for the other shipment.",
+          "quality": 0
+        },
+        {
+          "id": "b",
+          "text": "Separate the recommendations: consider the confirmed component route and check another food option.",
+          "feedback": "You used a new connection where it helps without assuming it solves every problem.",
+          "quality": 2
+        },
+        {
+          "id": "c",
+          "text": "Ignore the rail offer until the canal reopens.",
+          "feedback": "The confirmed slot is useful information even while the canal remains uncertain.",
+          "quality": 1
+        }
+      ]
+    },
+    "briefingPrompt": "Recommend a next step for the deliveries. Use a cargo need and a route connection to explain your advice.",
+    "careers": [
+      {
+        "id": "logistics",
+        "title": "Trade and logistics adviser",
+        "task": "Compare routes, transfer windows and cargo needs for an international client.",
+        "appeal": "You turn a world map into a practical delivery decision.",
+        "skill": "Seeing routes as linked services"
+      },
+      {
+        "id": "business",
+        "title": "Corporate risk analyst",
+        "task": "Explain which factories or customers are most exposed to a prolonged stoppage.",
+        "appeal": "You discover how a distant event can change a company’s working day.",
+        "skill": "Tracing supply dependencies"
+      },
+      {
+        "id": "strategy",
+        "title": "Geopolitical strategist",
+        "task": "Compare how firms could reduce dependence on a single passage over several years.",
+        "appeal": "You help shape choices before the next disruption arrives.",
+        "skill": "Comparing resilience options"
+      }
+    ],
+    "courses": [
+      "International Trade, Logistics and Transport",
+      "Foundations of Political Geography and Geopolitics"
+    ],
+    "takeaway": "A route is useful when the cargo, timing and onward connections work together."
+  },
+  {
+    "id": "frontier",
+    "title": "The Paper Frontier",
+    "kicker": "The road is open. The cargo is waiting.",
+    "location": "A corridor linking Türkiye and South Asia",
+    "coordinates": [
+      39.7,
+      44.37
+    ],
+    "category": "Borders & business",
+    "role": "Cross-border policy adviser",
+    "teaser": "Trucks can reach the next border, but their paperwork cannot. Find the missing connection.",
+    "assignment": "A trade corridor links Mediterranean ports with Türkiye, Iran, Afghanistan and South Asia. Refrigerated cherries wait at a handover because three agencies use different shipment identifiers. Roads and storage space are available. Your team must make the connection work.",
+    "supervisor": "Sometimes the missing link is an agreement, not a bridge. Follow the handover and find who needs to recognise what.",
+    "stakes": [
+      "Drivers",
+      "Fruit exporters",
+      "Border agencies"
+    ],
+    "concept": {
+      "term": "Connectivity",
+      "definition": "The ability to move between places in practice, using working infrastructure, services and permission to cross."
+    },
+    "sources": [
+      {
+        "id": "s1",
+        "title": "The terminal record",
+        "kind": "Release log",
+        "excerpt": "The terminal has released the cherry consignment under identifier C-41. The next agency’s system lists it as R-17 and cannot match the file.",
+        "context": "The physical cargo is ready for collection.",
+        "insight": "The problem appears at the transfer between administrative systems."
+      },
+      {
+        "id": "s2",
+        "title": "The transit desk",
+        "kind": "Agency message",
+        "excerpt": "The transit office requires a validated record before it can send the shipment to the border agency. Staff can check a shared record if all three agencies authorise it.",
+        "context": "This is the agreed sequence for the fictional corridor.",
+        "insight": "A coordinated administrative step is available, but nobody can skip the required permissions."
+      },
+      {
+        "id": "s3",
+        "title": "The driver’s view",
+        "kind": "Cargo update",
+        "excerpt": "Road space is available and refrigeration is working. The delivery window is shrinking while staff ask for the same documents under different references.",
+        "context": "No new road blockage has been reported.",
+        "insight": "More road space would not fix this particular delay."
+      }
+    ],
+    "question": {
+      "prompt": "Where should the team investigate first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The number of lanes approaching the terminal.",
+          "feedback": "There is spare road space. The mismatch appears in the handover records.",
+          "quality": 0
+        },
+        {
+          "id": "b",
+          "text": "Whether the drivers can bring another paper copy of the consignment documents.",
+          "feedback": "Another copy may help staff compare files, but the agencies still need an agreed matching record.",
+          "quality": 1
+        },
+        {
+          "id": "c",
+          "text": "How agencies match the same consignment before validating its next movement.",
+          "feedback": "You located the barrier between release, transit validation and border acceptance.",
+          "quality": 2
+        }
+      ],
+      "best": "c"
+    },
+    "choices": [
+      {
+        "id": "record",
+        "title": "Create one authorised matching record",
+        "description": "Bring the three desks together to reconcile identifiers, validate the file and agree how the next handover is confirmed.",
+        "tradeoff": "Staff must coordinate across different agency procedures.",
+        "consequence": "The cargo can progress once each responsible desk approves its stage. The same shared record also gives drivers a clearer explanation of where future delays occur.",
+        "quality": 2
+      },
+      {
+        "id": "space",
+        "title": "Add a protected waiting area",
+        "description": "Arrange extra refrigeration and safe driver facilities while the agencies continue their normal checks.",
+        "tradeoff": "This protects cargo but does not resolve the record mismatch.",
+        "consequence": "The fruit and drivers receive better protection. The shipment still needs its identifiers reconciled before it can move through the remaining handovers.",
+        "quality": 1
+      },
+      {
+        "id": "reroute",
+        "title": "Explore a different crossing",
+        "description": "Compare another border route and ask whether its agencies can accept the existing file.",
+        "tradeoff": "A detour adds time and may encounter the same paperwork issue.",
+        "consequence": "An alternative may become useful, but the client needs confirmation of document acceptance before spending its remaining delivery window on the detour.",
+        "quality": 1
+      }
+    ],
+    "development": {
+      "title": "The file matches. One approval remains.",
+      "text": "The three references now point to the same cargo. The transit desk validates the shared record. The final border office asks for confirmation from the receiving agency before admitting the shipment.",
+      "question": "What should the team do next?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Treat identifier reconciliation as permission to cross immediately.",
+          "feedback": "Matching a file and granting entry are different steps. The remaining approval still matters.",
+          "quality": 0
+        },
+        {
+          "id": "b",
+          "text": "Obtain the receiving confirmation and record the final acceptance.",
+          "feedback": "You followed the full chain rather than stopping at the first solved problem.",
+          "quality": 2
+        },
+        {
+          "id": "c",
+          "text": "Start a new infrastructure study before requesting the confirmation.",
+          "feedback": "Longer-term improvements may help, but this shipment now needs a specific administrative action.",
+          "quality": 1
+        }
+      ]
+    },
+    "briefingPrompt": "Explain the practical barrier and the next handover needed to move the cargo lawfully.",
+    "careers": [
+      {
+        "id": "policy",
+        "title": "Cross-border policy adviser",
+        "task": "Map which agencies must recognise a shipment and propose a workable handover process.",
+        "appeal": "You solve puzzles where business and public rules meet.",
+        "skill": "Understanding institutions and permissions"
+      },
+      {
+        "id": "business",
+        "title": "International business adviser",
+        "task": "Help an exporter decide whether a promised corridor works for its actual cargo.",
+        "appeal": "You test big commercial promises against the details that make them useful.",
+        "skill": "Distinguishing infrastructure from effective access"
+      },
+      {
+        "id": "diplomacy",
+        "title": "Diplomatic adviser",
+        "task": "Prepare discussions on cooperation between neighbouring transport and border authorities.",
+        "appeal": "You help turn shared interests into everyday working arrangements.",
+        "skill": "Building practical cross-border cooperation"
+      }
+    ],
+    "courses": [
+      "International Trade, Logistics and Transport",
+      "Research Methodology and Analytical Tools"
+    ],
+    "takeaway": "Connected places need compatible decisions and permissions as well as roads."
+  },
+  {
+    "id": "signal",
+    "title": "The Broken Frequency",
+    "kicker": "The screen goes dark. The story grows.",
+    "location": "Mediterranean–Indian Ocean networks",
+    "coordinates": [
+      23.59,
+      58.41
+    ],
+    "category": "Digital connections",
+    "role": "Digital risk analyst",
+    "teaser": "An outage interrupts cargo tracking and sparks claims of an attack. Restore a useful picture before repeating the headline.",
+    "assignment": "Connected services fail across a network linking Europe, North Africa and the Indian Ocean. Some cargo trackers stop updating while local refrigeration still runs. An unverified graphic calls it an attack. Advise on keeping services working and explaining what is known.",
+    "supervisor": "Two questions: what stopped working, and why? You can act on the first while the second is still being investigated.",
+    "stakes": [
+      "Cargo operators",
+      "Service users",
+      "Network engineers"
+    ],
+    "concept": {
+      "term": "Dependency",
+      "definition": "A connection that one service needs in order to work, sometimes far from the people using it."
+    },
+    "sources": [
+      {
+        "id": "s1",
+        "title": "The network dashboard",
+        "kind": "Engineering note",
+        "excerpt": "A cable landing station is online, but its onward connection to a data centre has failed. Some traffic is using a slower backup route through Muscat.",
+        "context": "Engineers have located an affected link, not established its cause.",
+        "insight": "A working landing station does not guarantee an end-to-end service."
+      },
+      {
+        "id": "s2",
+        "title": "The refrigeration check",
+        "kind": "Local operations",
+        "excerpt": "Remote temperature graphs are frozen. A staff member checks the local controllers: the refrigeration is still running and temperatures remain within the required range.",
+        "context": "Local readings checked directly.",
+        "insight": "A missing data feed does not automatically mean the physical cargo system failed."
+      },
+      {
+        "id": "s3",
+        "title": "The attack graphic",
+        "kind": "Unverified claim",
+        "excerpt": "A graphic circulating among trading desks says a hostile state caused the outage. It provides no technical record or identifiable source for the claim.",
+        "context": "Origin and supporting evidence are unconfirmed.",
+        "insight": "An explanation can spread faster than the evidence needed to support it."
+      }
+    ],
+    "question": {
+      "prompt": "What can you tell the client with confidence?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The remote graph is frozen, so the refrigerated cargo must be warming.",
+          "feedback": "The direct local readings show that refrigeration is still operating.",
+          "quality": 0
+        },
+        {
+          "id": "b",
+          "text": "A service link is disrupted; local cooling still works, and the cause remains under investigation.",
+          "feedback": "You kept the service failure, physical conditions and attribution separate.",
+          "quality": 2
+        },
+        {
+          "id": "c",
+          "text": "The cable landing station is online, so no significant service is affected.",
+          "feedback": "A later connection has failed. One working part does not prove the whole service works.",
+          "quality": 0
+        }
+      ],
+      "best": "b"
+    },
+    "choices": [
+      {
+        "id": "continuity",
+        "title": "Keep essential work moving",
+        "description": "Prioritise limited backup capacity, request local cargo checks and communicate confirmed service impacts.",
+        "tradeoff": "Some less urgent traffic must wait.",
+        "consequence": "Essential messages receive the available capacity. Cargo staff use direct readings, while the public update explains the disruption without naming an unproven cause.",
+        "quality": 2
+      },
+      {
+        "id": "restore",
+        "title": "Focus on full technical restoration",
+        "description": "Keep the engineering team concentrated on restoring the main link before changing service priorities.",
+        "tradeoff": "Users may lose essential updates while restoration continues.",
+        "consequence": "Engineers retain a clear task, but clients need a continuity plan too. Direct checks and priority messages can reduce harm before the main connection returns.",
+        "quality": 1
+      },
+      {
+        "id": "backup",
+        "title": "Switch everything to the backup",
+        "description": "Ask for all services to move immediately onto the functioning backup route.",
+        "tradeoff": "The backup has limited capacity.",
+        "consequence": "Some services return, but congestion builds. The team must decide which communications matter most instead of treating the backup as an unlimited replacement.",
+        "quality": 1
+      }
+    ],
+    "development": {
+      "title": "One link returns",
+      "text": "The main connection starts carrying traffic again. Engineers report physical damage but have not determined its cause. A local cargo check confirms safe temperatures. The backup route remains congested.",
+      "question": "What should the next briefing say?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Services are recovering; keep priority measures until performance is checked and leave the cause open.",
+          "feedback": "You distinguish early recovery from a fully verified restoration and keep the cause proportional to the evidence.",
+          "quality": 2
+        },
+        {
+          "id": "b",
+          "text": "Physical damage proves a deliberate attack.",
+          "feedback": "Damage is an observation. Whether it was deliberate requires further evidence.",
+          "quality": 0
+        },
+        {
+          "id": "c",
+          "text": "Remove all continuity measures as soon as the first data arrives.",
+          "feedback": "Recovery is encouraging, but the team should confirm stable performance before removing every safeguard.",
+          "quality": 1
+        }
+      ]
+    },
+    "briefingPrompt": "Explain what is affected, which service you would protect first and what you cannot yet say about the cause.",
+    "careers": [
+      {
+        "id": "digital",
+        "title": "Digital risk analyst",
+        "task": "Explain how a network failure changes a company’s exposure and immediate decisions.",
+        "appeal": "You connect hidden infrastructure to visible effects on people and trade.",
+        "skill": "Tracing digital dependencies"
+      },
+      {
+        "id": "continuity",
+        "title": "Business continuity adviser",
+        "task": "Help teams keep essential services available while technical specialists restore systems.",
+        "appeal": "Your advice becomes a practical plan people can use straight away.",
+        "skill": "Prioritising limited capacity"
+      },
+      {
+        "id": "strategy",
+        "title": "Geopolitical strategist",
+        "task": "Compare future investments in alternative routes, data infrastructure and cooperation.",
+        "appeal": "You study the choices shaping how regions stay connected.",
+        "skill": "Exploring infrastructure vulnerability"
+      }
+    ],
+    "courses": [
+      "Research Methodology and Analytical Tools",
+      "Emerging Global Challenges in Geopolitics"
+    ],
+    "takeaway": "A useful analyst can recommend action before every cause is known."
+  },
+  {
+    "id": "grain",
+    "title": "The Grain Shadow",
+    "kicker": "Full warehouses. Smaller shopping baskets.",
+    "location": "Tunis, Tunisia & Amman, Jordan",
+    "coordinates": [
+      36.81,
+      10.18
+    ],
+    "category": "Food & livelihoods",
+    "role": "Food-security policy analyst",
+    "teaser": "The grain total looks reassuring. Families still face rising prices. Find what the headline number misses.",
+    "assignment": "Regional grain stocks appear sufficient for the next delivery cycle. Yet retailers in Tunis and Amman are selling smaller baskets at higher prices. Your team has warehouse, approval and delivery records. Explain how food can be available but hard to reach.",
+    "supervisor": "Follow the grain to the household. A stock total is a useful starting point, not the end of the story.",
+    "stakes": [
+      "Households",
+      "Retailers",
+      "Warehouse & transport teams"
+    ],
+    "concept": {
+      "term": "Access",
+      "definition": "Whether people can actually obtain and afford something, rather than whether it exists somewhere in the system."
+    },
+    "sources": [
+      {
+        "id": "s1",
+        "title": "The stock dashboard",
+        "kind": "Regional summary",
+        "excerpt": "Warehouses hold enough grain for the next scheduled delivery cycle. The dashboard counts stored grain, including batches that have not received release approval.",
+        "context": "The total measures stock, not grain delivered to shops.",
+        "insight": "Stored grain can be counted before it becomes available to buyers."
+      },
+      {
+        "id": "s2",
+        "title": "The release queue",
+        "kind": "Warehouse record",
+        "excerpt": "Several signed inspection results have not been linked to their release files. Trucks wait despite available grain and drivers. A longer alternative road route is available.",
+        "context": "Records show an administrative delay before dispatch.",
+        "insight": "The immediate bottleneck comes before the road journey."
+      },
+      {
+        "id": "s3",
+        "title": "The shopping basket",
+        "kind": "Market reporting",
+        "excerpt": "Retailers receive smaller deliveries and pay more for urgent transport. Families on tight budgets buy less. Some distant retailers also face longer journeys from the warehouses.",
+        "context": "Local effects differ by income and delivery distance.",
+        "insight": "Practical access includes both distribution and what households can afford."
+      }
+    ],
+    "question": {
+      "prompt": "How can the dashboard and the market reports both be accurate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A temporary price rise may be the main problem, so another import order should be enough.",
+          "feedback": "Extra imports can help supply, but the records show a release delay that new grain could also encounter.",
+          "quality": 1
+        },
+        {
+          "id": "b",
+          "text": "Transport is expensive, so the team should focus only on routes after the warehouses.",
+          "feedback": "Delivery costs matter, but some grain is still waiting for its release files to be linked.",
+          "quality": 1
+        },
+        {
+          "id": "c",
+          "text": "Grain exists, but delayed releases and delivery costs stop it reaching people affordably.",
+          "feedback": "You connected the aggregate stock picture to the steps households depend on.",
+          "quality": 2
+        }
+      ],
+      "best": "c"
+    },
+    "choices": [
+      {
+        "id": "release",
+        "title": "Unblock releases and track deliveries",
+        "description": "Link the completed checks to release files, prioritise constrained routes and monitor shop deliveries and prices.",
+        "tradeoff": "Coordination and targeted transport support need resources.",
+        "consequence": "Verified batches can leave the warehouse. The team can check whether extra deliveries reach affected neighbourhoods rather than assuming a lower stock figure means failure.",
+        "quality": 2
+      },
+      {
+        "id": "buy",
+        "title": "Order additional grain",
+        "description": "Seek another shipment to increase the regional stock buffer while the current release process continues.",
+        "tradeoff": "New grain may enter the same queue.",
+        "consequence": "The buffer could help later, but the next shipment will not fix today’s unsigned release files or the cost of reaching distant shops.",
+        "quality": 1
+      },
+      {
+        "id": "prices",
+        "title": "Focus on temporary household relief",
+        "description": "Recommend targeted support for households facing the sharpest price increases while officials examine the supply chain.",
+        "tradeoff": "Relief needs funding and does not itself unblock dispatch.",
+        "consequence": "Some families gain immediate purchasing power. The team still needs a release and delivery plan so support is matched by food reaching the market.",
+        "quality": 1
+      }
+    ],
+    "development": {
+      "title": "Dispatch improves. One market lags.",
+      "text": "More verified batches leave the warehouses. Prices stabilise near the main road, but deliveries remain expensive in a distant district. Its smaller shops cannot fill a truck on their own.",
+      "question": "What should the team investigate next?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whether shops can share a delivery or receive targeted transport support.",
+          "feedback": "You followed the remaining access problem instead of assuming that warehouse release solved everything.",
+          "quality": 2
+        },
+        {
+          "id": "b",
+          "text": "How to increase the headline stock total again.",
+          "feedback": "The remaining evidence points to the last delivery stage, not a lack of stored grain.",
+          "quality": 0
+        },
+        {
+          "id": "c",
+          "text": "Whether the district’s figures can be combined with the cheaper markets into one average.",
+          "feedback": "Averages can help summarise a region, but they should not hide the community still facing a barrier.",
+          "quality": 1
+        }
+      ]
+    },
+    "briefingPrompt": "Explain the missing step between stocks and households, then recommend one action and one way to check its effect.",
+    "careers": [
+      {
+        "id": "food",
+        "title": "Food-security policy analyst",
+        "task": "Combine stock, market and household information to explain who struggles and why.",
+        "appeal": "You connect large economic signals to everyday lives.",
+        "skill": "Distinguishing availability from access"
+      },
+      {
+        "id": "development",
+        "title": "Development adviser",
+        "task": "Design support that addresses a specific delivery or affordability barrier.",
+        "appeal": "You work with communities and institutions on changes people can feel.",
+        "skill": "Targeting interventions and checking outcomes"
+      },
+      {
+        "id": "business",
+        "title": "Market risk analyst",
+        "task": "Help food importers anticipate how logistics and policy decisions affect buyers.",
+        "appeal": "You find patterns across trade, prices and local conditions.",
+        "skill": "Reading distribution and price transmission"
+      }
+    ],
+    "courses": [
+      "International Trade, Logistics and Transport",
+      "Research Methodology and Analytical Tools"
+    ],
+    "takeaway": "Big totals become meaningful when you follow what happens to people at the end of the chain."
+  },
+  {
+    "id": "punjab",
+    "title": "The Lahore File",
+    "kicker": "Identities confirmed. Responsibility still in question.",
+    "location": "Punjab, Pakistan",
+    "coordinates": [
+      31.55,
+      74.34
+    ],
+    "category": "Diplomacy & evidence",
+    "role": "Diplomatic risk adviser",
+    "teaser": "An espionage case is uncovered in Punjab. Help separate proven conduct from wider accusations before the crisis spreads.",
+    "assignment": "A judicial case summary in Lahore identifies two foreign consultants in an unauthorised transfer of restricted documents. Their identities and conduct are corroborated; government direction is not established. A leaked list prompts demands for wider restrictions as unrelated exporters fear disruption.",
+    "supervisor": "Be precise about what each record proves. Protecting the investigation and keeping diplomacy workable can be part of the same recommendation.",
+    "stakes": [
+      "Investigators",
+      "Export workers",
+      "Diplomatic teams"
+    ],
+    "concept": {
+      "term": "Attribution",
+      "definition": "Establishing who is responsible for an action, which may require more evidence than identifying the people who carried it out."
+    },
+    "sources": [
+      {
+        "id": "s1",
+        "title": "The judicial summary",
+        "kind": "Verified case record",
+        "excerpt": "Two foreign consultants are identified in an unauthorised transfer of restricted documents. Independent access and transfer records support the account. Their case-linked access has been suspended.",
+        "context": "Individual names are withheld in this briefing.",
+        "insight": "Identity and evidenced conduct can be established without proving who directed them."
+      },
+      {
+        "id": "s2",
+        "title": "The leaked list",
+        "kind": "Unverified extension",
+        "excerpt": "A leaked list labels other foreign consultants as part of the same network. It provides no case records linking those people to the document transfer.",
+        "context": "The list includes people working on unrelated contracts.",
+        "insight": "A wider accusation needs its own evidence."
+      },
+      {
+        "id": "s3",
+        "title": "The export desk",
+        "kind": "Commercial update",
+        "excerpt": "Firms in Sialkot and Faisalabad rely on lawful overseas technical contacts. Consular liaison has begun for the case. Broad restrictions could delay unrelated orders and affect local jobs.",
+        "context": "Commercial effects do not determine the legal evidence.",
+        "insight": "A response can target evidenced conduct while protecting unrelated work."
+      }
+    ],
+    "question": {
+      "prompt": "Which claim still needs separate evidence?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whether the two identified people had a connection to the documented transfer.",
+          "feedback": "Independent records already support the connection described in the judicial summary.",
+          "quality": 1
+        },
+        {
+          "id": "b",
+          "text": "Whether a government directed the operation and whether the other people belong to it.",
+          "feedback": "You identified the step from evidenced individual conduct to a larger claim of sponsorship or network membership.",
+          "quality": 2
+        },
+        {
+          "id": "c",
+          "text": "Whether any precaution can be taken before every foreign contact is examined.",
+          "feedback": "Case-linked access has already been suspended. A targeted precaution does not require treating every contact as implicated.",
+          "quality": 0
+        }
+      ],
+      "best": "b"
+    },
+    "choices": [
+      {
+        "id": "target",
+        "title": "Keep the response tied to the case",
+        "description": "Support the lawful investigation, preserve evidence, use consular channels and explain why unrelated contracts are treated separately.",
+        "tradeoff": "The public may demand a broader immediate response.",
+        "consequence": "Investigators can build the case without presenting the leaked list as proof. Exporters receive clearer rules, and diplomatic teams can discuss established facts.",
+        "quality": 2
+      },
+      {
+        "id": "review",
+        "title": "Review all sensitive consultancy access",
+        "description": "Request a time-limited review of sensitive access while preserving lawful unrelated trade.",
+        "tradeoff": "A wider review uses staff and can delay legitimate work.",
+        "consequence": "The review may reveal useful gaps, but it needs defined criteria and an end date. Without those, a precaution can become a broad and costly restriction.",
+        "quality": 1
+      },
+      {
+        "id": "private",
+        "title": "Keep the diplomatic discussion private",
+        "description": "Prioritise legal and consular channels and postpone a fuller public explanation.",
+        "tradeoff": "The leaked list can fill the information gap.",
+        "consequence": "Formal contacts continue, but affected people lack clarity about whether the list is reliable. A careful factual statement could reduce avoidable suspicion.",
+        "quality": 1
+      }
+    ],
+    "development": {
+      "title": "A payment trail, with a gap",
+      "text": "Investigators verify a payment from a private company to one consultant. The company’s ultimate client remains unknown. Separate checks find no link between several people on the leaked list and the transfer.",
+      "question": "How should you update the briefing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Describe the payment as a lead, remove unsupported wider claims and keep investigating direction.",
+          "feedback": "You advanced the case while correcting the parts the new evidence does not support.",
+          "quality": 2
+        },
+        {
+          "id": "b",
+          "text": "Present the private payment as final proof that a state ordered the operation.",
+          "feedback": "The payment is relevant, but the company’s client and any state direction remain unestablished.",
+          "quality": 0
+        },
+        {
+          "id": "c",
+          "text": "Discard the payment because it does not answer every question.",
+          "feedback": "An incomplete lead can still matter. Explain both what it adds and what remains unresolved.",
+          "quality": 1
+        }
+      ]
+    },
+    "briefingPrompt": "Explain what is established about the case, recommend a proportionate response and name one question still being investigated.",
+    "careers": [
+      {
+        "id": "diplomacy",
+        "title": "Diplomatic risk adviser",
+        "task": "Prepare a briefing for officials managing a sensitive case across borders.",
+        "appeal": "You work at the intersection of evidence, language and international relationships.",
+        "skill": "Writing precise, proportionate advice"
+      },
+      {
+        "id": "business",
+        "title": "Corporate intelligence analyst",
+        "task": "Help an exporter understand which restrictions actually affect its staff and partners.",
+        "appeal": "You turn a confusing public story into practical decisions for a business.",
+        "skill": "Separating case exposure from wider speculation"
+      },
+      {
+        "id": "strategy",
+        "title": "Geopolitical strategist",
+        "task": "Compare how different public and diplomatic responses could affect longer-term cooperation.",
+        "appeal": "You examine consequences beyond the immediate headline.",
+        "skill": "Mapping escalation and cooperation paths"
+      }
+    ],
+    "courses": [
+      "Research Methodology and Analytical Tools",
+      "Global Balance of Power and Spheres of Influence"
+    ],
+    "takeaway": "Precision about responsibility can strengthen an investigation and keep its consequences proportionate."
+  }
+]

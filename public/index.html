@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#01153E">
+  <meta name="description" content="Read the signals. Make the call. Step into the world of geopolitical analysis with eight interactive missions from EMUNI.">
+  <title>CROSSROADS — Your First Briefing</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preload" as="image" href="assets/koper.webp">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to game</a>
+  <header class="site-header">
+    <a href="#" id="brand" class="wordmark" aria-label="Crossroads home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 27L27 3M5 5l22 22M3 17h12V5M17 29V17h12" stroke="currentColor" stroke-width="2"/></svg><span>CROSSROADS<small>YOUR FIRST BRIEFING</small></span></a>
+    <nav aria-label="Game controls"><button id="missions-button" class="header-button">The missions</button><button id="sound-button" class="header-button sound-control" aria-pressed="false">Sound off</button><button id="help-button" class="icon-button" aria-label="How to play">?</button><span class="emuni-wordmark">EMUNI</span></nav>
+  </header>
+  <main id="main" tabindex="-1"><div class="loading-shell"><span class="eyebrow">YOUR NEXT PERSPECTIVE</span><h1>The world is connected.<br>Follow the story.</h1><p>Opening your briefing…</p></div></main>
+  <footer class="site-footer"><span>EMUNI · EURO-MEDITERRANEAN UNIVERSITY</span><a href="https://emuni.si/mgg/" target="_blank" rel="noopener">MA in Geopolitics and Geoeconomics <span aria-hidden="true">↗</span></a></footer>
+  <div id="announcer" role="status" aria-live="polite" class="sr-only"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="modal" aria-labelledby="modal-title"><div id="modal-content"></div><button class="dialog-close icon-button" aria-label="Close dialog" id="close-modal">×</button></dialog>
+  <noscript><p class="fatal">Please enable JavaScript to open your missions.</p></noscript>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
