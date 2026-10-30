@@ -28,7 +28,7 @@ Each mission includes three sources, a source judgement, three response branches
 ## Design and behaviour
 
 - Navy #01153E cinematic openings with eight original scene illustrations, warm reading cards, restrained gold and teal feedback.
-- Responsive phone, tablet and desktop layouts; tap controls, keyboard access, reduced-motion support and opt-in sound cues.
+- Responsive phone, tablet and desktop layouts; tap controls, keyboard access, reduced-motion support and a looping soundtrack at 30% volume. Sound starts enabled and remembers the player’s choice; browsers that block autoplay begin music on the first interaction.
 - A geographic locator based on Natural Earth coastlines, plus all eight locations to explore.
 - Independent device-local progress, shuffled choices kept stable within each run, restart confirmation and briefing export.
 - Every answer gives feedback and permits progress. No countdown or career aptitude score.

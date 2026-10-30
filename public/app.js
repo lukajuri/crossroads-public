@@ -4,8 +4,10 @@ const $ = s => document.querySelector(s);
 const main = $('#main');
 const paths={arrow:'M4 12h15m-5-5 5 5-5 5',chevron:'m9 5 7 7-7 7',down:'m6 9 6 6 6-6',check:'m5 12 4 4L19 6',search:'M10.5 18a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15Zm5-2L22 22',clock:'M12 8v5l3 2M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z',map:'m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16',pin:'M12 22s8-8 8-14a8 8 0 0 0-16 0c0 6 8 14 8 14Zm0-11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z',file:'M5 2h10l4 4v16H5V2Zm10 0v5h4M8 12h8m-8 4h6',signal:'M4 18v-5m5 5V9m5 9V5m5 13V1',ship:'m3 14 9-4 9 4-4 7H7l-4-7Zm4-2V6h10v6M9 6V3h6v3',shield:'M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6l-9-4Z',network:'M12 10V5m-6 6L3 8m15 3 3-3M6 18l-2 4m14-4 2 4M16 14a4 4 0 1 1-8 0 4 4 0 0 1 8 0Zm-1-12a3 3 0 1 1-6 0',spark:'m12 2 2.8 7.2L22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8L12 2Z',balance:'M12 3v18M5 21h14M3 7h18M6 7l-4 7h8L6 7Zm12 0-4 7h8l-4-7Z',sound:'m3 9 5 0 5-5v16l-5-5H3V9Zm14-2c3 3 3 7 0 10m3-13c5 5 5 11 0 16',mute:'m3 9 5 0 5-5v16l-5-5H3V9Zm14 0 5 6m0-6-5 6',reset:'M4 8a9 9 0 1 1-1 9M4 2v6h6',people:'M16 21v-3a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v3M9 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm11 11v-3a4 4 0 0 0-3-4m0-12a4 4 0 0 1 0 8',brief:'M3 6h18v15H3V6Zm5 0V2h8v4M3 12h18m-11-2h4v5h-4v-5'};
 const icon=(name,cls='')=>`<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${paths[name]||paths.file}"/></svg>`;
-let missions=[],run=null,view='intro',expanded=null,completed=[],settings={sound:false},request=null,aiError='',toastTimer=null,storageWarning=false;
-let audioContext=null;
+let missions=[],run=null,view='intro',expanded=null,completed=[],settings={sound:true},request=null,aiError='',toastTimer=null,storageWarning=false;
+const soundtrack=$('#soundtrack');
+soundtrack.volume=.3;
+let audioPlayPending=null;
 const readStore=key=>{try{return JSON.parse(localStorage.getItem(key));}catch{return null;}};
 function writeStore(key,val){try{localStorage.setItem(key,JSON.stringify(val));return true;}catch{if(!storageWarning){storageWarning=true;toast('Progress stays open here, but this browser cannot save it.');}return false;}}
 function persist(){writeStore(SAVE_KEY,run);}
@@ -13,8 +15,16 @@ const mission=()=>missions.find(m=>m.id===run.caseId);
 function ordered(items,ids){return ids.map(id=>items.find(x=>x.id===id)).filter(Boolean);}
 function announce(t){$('#announcer').textContent=t;}
 function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.hidden=true,3000);}
-function sound(success=false){if(!settings.sound)return;try{audioContext??=new (window.AudioContext||window.webkitAudioContext)(); if(audioContext.state==='suspended')audioContext.resume().catch(()=>{});const t=audioContext.currentTime;const notes=success?[523.25,659.25,783.99]:[523.25];notes.forEach((f,i)=>{const osc=audioContext.createOscillator(),g=audioContext.createGain();osc.type='sine';osc.frequency.value=f;g.gain.setValueAtTime(0,t+i*.07);g.gain.linearRampToValueAtTime(.035,t+i*.07+.012);g.gain.exponentialRampToValueAtTime(.001,t+i*.07+.19);osc.connect(g);g.connect(audioContext.destination);osc.start(t+i*.07);osc.stop(t+i*.07+.2);});}catch{}}
-function updateSound(){const b=$('#sound-button');b.innerHTML=icon(settings.sound?'sound':'mute')+`<span>Sound ${settings.sound?'on':'off'}</span>`;b.setAttribute('aria-pressed',String(settings.sound));b.setAttribute('aria-label',settings.sound?'Turn sound off':'Turn sound on');}
+function sound(){
+ if(!settings.sound||!soundtrack.paused||audioPlayPending)return;
+ try{audioPlayPending=Promise.resolve(soundtrack.play()).then(()=>{if(!settings.sound)soundtrack.pause();}).catch(()=>{}).finally(()=>{audioPlayPending=null;});}catch{}
+}
+function updateSound(){const b=$('#sound-button');b.innerHTML=icon(settings.sound?'sound':'mute')+`<span>Sound ${settings.sound?'on':'off'}</span>`;b.setAttribute('aria-pressed',String(settings.sound));b.setAttribute('aria-label',settings.sound?'Turn sound off':'Turn sound on');if(settings.sound)sound();else soundtrack.pause();}
+// Browsers may defer music until a gesture. Retry within that gesture, without
+// restarting an already playing track or briefly playing when turning it off.
+function unlockSound(event){if(event.target.closest?.('#sound-button'))return;sound();}
+document.addEventListener('pointerdown',unlockSound,{capture:true});
+document.addEventListener('keydown',unlockSound,{capture:true});
 function render(scroll=false,focusId=null){
  const prev=focusId||document.activeElement?.id;
  const m=mission(); document.title=`${view==='collection'?'The missions':m.title} · CROSSROADS`;
@@ -83,8 +93,8 @@ document.addEventListener('click',event=>{const b=event.target.closest('button,a
 document.addEventListener('input',event=>{if(event.target.id==='recommendation'){run.recommendation=event.target.value.slice(0,1200);persist();$('#word-count').textContent=`${run.recommendation.length}/1,200 characters`;}});
 $('#brand').addEventListener('click',event=>{event.preventDefault();if(!run)return;view='intro';render(true);});
 $('#missions-button').addEventListener('click',()=>{if(!run)return;view='collection';render(true);});
-$('#sound-button').addEventListener('click',()=>{settings.sound=!settings.sound;writeStore(SETTINGS_KEY,settings);updateSound();sound();announce(`Sound ${settings.sound?'on':'off'}.`);});
+$('#sound-button').addEventListener('click',()=>{settings.sound=!settings.sound;writeStore(SETTINGS_KEY,settings);updateSound();announce(`Sound ${settings.sound?'on':'off'}.`);});
 $('#help-button').addEventListener('click',help);$('#close-modal').addEventListener('click',()=>$('#modal').close());
 $('#modal').addEventListener('click',event=>{if(event.target===$('#modal')){const r=$('#modal').getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)$('#modal').close();}});
-async function init(){try{const res=await fetch('data/missions.json');if(!res.ok)throw new Error();missions=await res.json();if(!Array.isArray(missions)||missions.length!==8)throw new Error();settings={sound:readStore(SETTINGS_KEY)?.sound===true};updateSound();const old=readStore(SAVE_KEY);run=validateRun(old,missions)||freshRun(missions[0]);completed=(readStore(PROGRESS_KEY)||[]);if(!Array.isArray(completed))completed=[];completed=completed.filter(id=>missions.some(m=>m.id===id));if(run.stage===5){view='game';}render();}catch{main.innerHTML=`<div class="loading-shell"><span class="eyebrow gold">CROSSROADS</span><h1>Your briefing could not open.</h1><p>Check your connection, then refresh the page.</p><button class="primary" id="reload">Try again</button></div>`;$('#reload').onclick=()=>location.reload();}}
+async function init(){settings={sound:readStore(SETTINGS_KEY)?.sound!==false};updateSound();try{const res=await fetch('data/missions.json');if(!res.ok)throw new Error();missions=await res.json();if(!Array.isArray(missions)||missions.length!==8)throw new Error();const old=readStore(SAVE_KEY);run=validateRun(old,missions)||freshRun(missions[0]);completed=(readStore(PROGRESS_KEY)||[]);if(!Array.isArray(completed))completed=[];completed=completed.filter(id=>missions.some(m=>m.id===id));if(run.stage===5){view='game';}render();}catch{main.innerHTML=`<div class="loading-shell"><span class="eyebrow gold">CROSSROADS</span><h1>Your briefing could not open.</h1><p>Check your connection, then refresh the page.</p><button class="primary" id="reload">Try again</button></div>`;$('#reload').onclick=()=>location.reload();}}
 init();

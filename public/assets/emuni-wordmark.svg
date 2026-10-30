@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 44" role="img" aria-label="EMUNI">
+  <g fill="#fff">
+    <path d="M0 0h32v8H9v10h21v8H9v10h23v8H0Z"/>
+    <path d="M43 0h9l16 27L84 0h9v44h-9V17L71 39h-6L52 17v27h-9Z"/>
+    <path d="M104 0h9v26c0 7 4 10 11 10s11-3 11-10V0h9v26c0 12-8 18-20 18s-20-6-20-18Z"/>
+    <path d="M155 0h9l24 29V0h9v44h-9l-24-29v29h-9Z"/>
+    <path d="M209 0h9v44h-9Z"/>
+  </g>
+</svg>

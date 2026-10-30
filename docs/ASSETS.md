@@ -34,4 +34,6 @@ Self-hosted DM Sans and Newsreader are distributed with their SIL Open Font Lice
 
 ## Interface and sound
 
-Icons, favicon and the CROSSROADS symbol are small code-native SVG graphics. The EMUNI name is typeset text; no university seal or logo has been invented. Optional selection and completion cues are synthesized with the browser Web Audio API, begin only after user opt-in, and require no audio downloads.
+Icons, favicon and the CROSSROADS symbol are small code-native SVG graphics. The EMUNI wordmark (`public/assets/emuni-wordmark.svg`) uses vector letterforms matched to the reference supplied by the project owner.
+
+`public/assets/tense-theme.mp3` is the soundtrack supplied by the project owner, included unchanged. It loops at 30% volume while Sound is on. Sound is enabled for a first visit, and an explicitly saved preference is respected. The browser may defer playback until the first pointer or keyboard interaction. Turning sound off pauses the track; turning it on resumes playback without restarting it. The soundtrack continues through mission navigation and replaces the synthesized selection and completion cues.

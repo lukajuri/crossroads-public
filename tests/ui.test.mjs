@@ -31,12 +31,21 @@ function finished(m, recommendation='A cautious recommendation.') {
   return {...engine.freshRun(m,()=>.5),stage:5,read:m.sources.map(s=>s.id),observationId:best(m.question.options),observationSubmitted:true,actionId:best(m.choices),evidenceIds:m.sources.slice(0,2).map(s=>s.id),decisionSubmitted:true,updateId:best(m.development.options),updateSubmitted:true,recommendation};
 }
 
-async function open({saved, rawSave, onMentor, noStorage=false, dataFailure=false}={}) {
+async function open({saved, rawSave, onMentor, noStorage=false, dataFailure=false, settings, blockAutoplay=false}={}) {
   const errors=[], calls=[], timers=new Map();let nextTimer=0;
   const virtualConsole=new VirtualConsole();
   virtualConsole.on('jsdomError', error=>errors.push(error));
   const dom=new JSDOM(html,{url:'https://game.example/crossroads/',runScripts:'outside-only',pretendToBeVisual:true,virtualConsole});
   const {window}=dom, doc=window.document;
+  const audio={plays:0,pauses:0,paused:true,blockNext:blockAutoplay};
+  Object.defineProperty(window.HTMLMediaElement.prototype,'paused',{get(){return audio.paused;}});
+  window.HTMLMediaElement.prototype.play=function(){
+    audio.plays++;
+    if(audio.blockNext){audio.blockNext=false;return Promise.reject(new window.DOMException('A gesture is required.','NotAllowedError'));}
+    audio.paused=false;return Promise.resolve();
+  };
+  window.HTMLMediaElement.prototype.pause=function(){audio.pauses++;audio.paused=true;};
+  if(settings!==undefined)window.localStorage.setItem(engine.SETTINGS_KEY,JSON.stringify(settings));
   window.scrollTo=()=>{};
   window.HTMLElement.prototype.scrollIntoView=()=>{};
   window.HTMLDialogElement.prototype.showModal=function(){this.open=true;};
@@ -63,7 +72,7 @@ async function open({saved, rawSave, onMentor, noStorage=false, dataFailure=fals
   const click=selector=>{const element=doc.querySelector(selector);assert.ok(element,`control exists: ${selector}`);assert.notEqual(element.disabled,true,`control enabled: ${selector}`);element.click();return element;};
   const savedRun=()=>JSON.parse(window.localStorage.getItem(engine.SAVE_KEY));
   const ask=()=>{click('[data-do="mentor-consent"]');assert.equal(doc.querySelector('#modal').open,true);click('[data-do="consent-mentor"]');};
-  return {dom,window,doc,calls,errors,timers,click,ask,savedRun,close:()=>dom.window.close()};
+  return {dom,window,doc,calls,errors,timers,audio,click,ask,savedRun,close:()=>dom.window.close()};
 }
 
 async function completeMission(h,m,{recommendation=''}={}) {
@@ -259,5 +268,77 @@ test('data-loading failure offers recovery without invoking AI',async()=>{
   try{
     assert.ok(h.doc.querySelector('#reload'));
     assert.equal(h.calls.length,0);
+  }finally{h.close();}
+});
+
+
+test('soundtrack defaults on, loops at 30%, and continues through navigation',async()=>{
+  const h=await open();
+  try{
+    const track=h.doc.querySelector('#soundtrack');
+    assert.equal(track.getAttribute('src'),'assets/tense-theme.mp3');
+    assert.equal(track.loop,true);
+    assert.equal(track.volume,.3);
+    assert.equal(h.doc.querySelector('#sound-button').getAttribute('aria-pressed'),'true');
+    assert.equal(h.audio.paused,false);
+    track.currentTime=12;
+    h.click('[data-do="start"]');
+    h.click('[data-source="s1"]');
+    assert.equal(h.audio.plays,1,'navigation and selections do not restart music');
+    assert.equal(track.currentTime,12);
+    h.click('#sound-button');
+    assert.equal(h.audio.paused,true);
+    assert.equal(h.doc.querySelector('#sound-button').getAttribute('aria-pressed'),'false');
+    assert.equal(JSON.parse(h.window.localStorage.getItem(engine.SETTINGS_KEY)).sound,false);
+    h.click('#sound-button');await flush();
+    assert.equal(h.audio.paused,false);
+    assert.equal(track.currentTime,12,'sound resumes where it was paused');
+    assert.equal(h.audio.plays,2);
+    assert.equal(h.errors.length,0);
+  }finally{h.close();}
+});
+
+test('saved sound-off is respected and can be enabled',async()=>{
+  const h=await open({settings:{sound:false}});
+  try{
+    assert.equal(h.audio.plays,0);
+    assert.equal(h.doc.querySelector('#sound-button').getAttribute('aria-pressed'),'false');
+    h.doc.dispatchEvent(new h.window.Event('pointerdown',{bubbles:true}));
+    assert.equal(h.audio.plays,0,'interaction respects sound-off');
+    h.click('#sound-button');await flush();
+    assert.equal(h.audio.plays,1);
+    assert.equal(h.audio.paused,false);
+    assert.equal(JSON.parse(h.window.localStorage.getItem(engine.SETTINGS_KEY)).sound,true);
+  }finally{h.close();}
+});
+
+for(const gesture of ['pointerdown','keydown']){
+  test(`blocked autoplay retries on ${gesture} and remains controllable`,async()=>{
+    const h=await open({blockAutoplay:true});
+    try{
+      assert.equal(h.audio.paused,true);
+      assert.equal(h.audio.plays,1);
+      assert.equal(h.doc.querySelector('#sound-button').getAttribute('aria-pressed'),'true');
+      h.doc.querySelector('[data-do="start"]').dispatchEvent(new h.window.Event(gesture,{bubbles:true}));
+      await flush();
+      assert.equal(h.audio.paused,false);
+      assert.equal(h.audio.plays,2);
+      h.click('#sound-button');
+      assert.equal(h.audio.paused,true);
+      h.doc.dispatchEvent(new h.window.Event(gesture,{bubbles:true}));
+      assert.equal(h.audio.plays,2,'muted playback stays paused');
+      assert.equal(h.errors.length,0);
+    }finally{h.close();}
+  });
+}
+
+test('turning sound off after blocked autoplay never briefly starts the track',async()=>{
+  const h=await open({blockAutoplay:true});
+  try{
+    h.doc.querySelector('#sound-button').dispatchEvent(new h.window.Event('pointerdown',{bubbles:true}));
+    h.click('#sound-button');await flush();
+    assert.equal(h.audio.plays,1);
+    assert.equal(h.audio.paused,true);
+    assert.equal(h.errors.length,0);
   }finally{h.close();}
 });
