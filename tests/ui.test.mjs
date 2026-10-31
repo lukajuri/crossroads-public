@@ -313,7 +313,7 @@ test('soundtrack defaults on, loops at 30%, and continues through navigation',as
   const h=await open();
   try{
     const track=h.doc.querySelector('#soundtrack');
-    assert.equal(track.getAttribute('src'),'assets/tense-theme.mp3');
+    assert.equal(track.getAttribute('src'),'assets/ticking-clock.mp3');
     assert.equal(track.loop,true);
     assert.equal(track.volume,.3);
     assert.equal(h.doc.querySelector('#sound-button').getAttribute('aria-pressed'),'true');

@@ -8,7 +8,7 @@ Installation for lukajuri.eu / cPanel
 
 2. The game, all eight missions and career debriefs work immediately.
    No login, API key or installation is needed for players.
-   Keep assets/tense-theme.mp3 and assets/emuni-wordmark.svg with the game.
+   Keep assets/ticking-clock.mp3 and assets/emuni-wordmark.svg with the game.
    Sound starts enabled, loops at 30% volume, and remembers the player's choice.
    Browsers that block autoplay start music on the first interaction.
 
