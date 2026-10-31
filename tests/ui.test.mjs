@@ -34,7 +34,7 @@ function finished(m, recommendation='A cautious recommendation.') {
   return {...engine.freshRun(m,()=>.5),stage:5,read:m.sources.map(s=>s.id),observationId:best(m.question.options),observationSubmitted:true,actionId:best(m.choices),evidenceIds:m.sources.slice(0,2).map(s=>s.id),decisionSubmitted:true,updateId:best(m.development.options),updateSubmitted:true,recommendation,assessmentSubmitted:true};
 }
 
-async function open({saved, rawSave, onMentor, noStorage=false, dataFailure=false, settings, blockAutoplay=false}={}) {
+async function open({saved, rawSave, onMentor, noStorage=false, dataFailure=false, settings, blockAutoplay=false, random, openAtStory=true}={}) {
   const errors=[], calls=[], timers=new Map();let nextTimer=0;
   const virtualConsole=new VirtualConsole();
   virtualConsole.on('jsdomError', error=>errors.push(error));
@@ -67,19 +67,29 @@ async function open({saved, rawSave, onMentor, noStorage=false, dataFailure=fals
     calls.push({url,...options,payload:JSON.parse(options.body)});
     return onMentor?onMentor(options,calls):reply({feedback});
   };
-  window.__engine=engine;
+  window.__engine=random?{...engine,pickNext:(items,current,completed)=>engine.pickNext(items,current,completed,random)}:engine;
   window.__landPath=landPath;
   const executable=source.replace(/import\s*\{landPath\}\s*from\s*['"]\.\/assets\/land-path\.js['"];?/, 'const landPath=window.__landPath;').replace(/import\s*\{([^}]+)\}\s*from\s*['"]\.\/engine\.js(?:\?v=\d+)?['"];?/,(_,names)=>`const {${names.replace(/\s+as\s+/g,':')}}=window.__engine;`);
   window.eval(executable+'\n//# sourceURL=crossroads-app-runtime-test.js');
   await flush();
   const click=selector=>{const element=doc.querySelector(selector);assert.ok(element,`control exists: ${selector}`);assert.notEqual(element.disabled,true,`control enabled: ${selector}`);element.click();return element;};
+  // Most mission tests begin at a saved story; exercise the visible Continue
+  // control as their setup. Opening-screen tests opt out of this navigation.
+  if(saved&&openAtStory&&doc.querySelector('[data-do="resume"]'))click('[data-do="resume"]');
+  const start=()=>{
+    if(doc.querySelector('.welcome-shell')){
+      if(doc.querySelector('[data-do="resume"]'))click('[data-do="resume"]');
+      else {click('[data-do="collection"]');click('[data-mission="koper"]');}
+    }
+    if(doc.querySelector('.intro-shell'))click('[data-do="start"]');
+  };
   const savedRun=()=>JSON.parse(window.localStorage.getItem(engine.SAVE_KEY));
   const ask=()=>click('[data-do="ask-mentor"]');
-  return {dom,window,doc,calls,errors,timers,audio,click,ask,savedRun,close:()=>dom.window.close()};
+  return {dom,window,doc,calls,errors,timers,audio,click,start,ask,savedRun,close:()=>dom.window.close()};
 }
 
 async function completeMission(h,m,{recommendation='I would check the evidence and keep essential deliveries moving.'}={}) {
-  h.click('[data-do="start"]');
+  h.start();
   assert.ok(h.doc.querySelector('[data-do="check-observation"]').disabled,'initial evidence gate');
   for(const s of m.sources)h.click(`[data-source="${s.id}"]`);
   h.click(`[data-observation="${best(m.question.options)}"]`);
@@ -123,8 +133,7 @@ test('informed submission starts one request, shows waiting and safely restores 
   const h=await open({saved:savedDraft,onMentor:()=>pending.promise});
   let saved;
   try{
-    assert.match(h.doc.querySelector('.intro-assessment').textContent,/sent to your AI mentor/);
-    h.click('[data-do="start"]');
+    h.start();
     assert.equal(h.calls.length,0,'viewing and writing never sends data');
     assert.match(h.doc.querySelector('#submission-notice').textContent,/OpenAI/);
     assert.equal(h.doc.querySelector('#recommendation').required,true);
@@ -154,7 +163,7 @@ test('blank and whitespace-only writing cannot be submitted; a draft survives re
   const draft={...finished(missions[0],''),stage:4,assessmentSubmitted:false};
   const h=await open({saved:draft});let saved;
   try{
-    h.click('[data-do="start"]');
+    h.start();
     const input=h.doc.querySelector('#recommendation'),button=h.doc.querySelector('#submit-briefing');
     assert.equal(button.disabled,true);
     for(const value of ['   ', '\n\t', '\u00a0']){
@@ -168,7 +177,7 @@ test('blank and whitespace-only writing cannot be submitted; a draft survives re
     assert.equal(button.disabled,false);assert.equal(h.calls.length,0);saved=h.savedRun();
   }finally{h.close();}
   const reloaded=await open({saved});
-  try{reloaded.click('[data-do="start"]');assert.equal(reloaded.doc.querySelector('#recommendation').value,saved.recommendation);assert.equal(reloaded.calls.length,0);}finally{reloaded.close();}
+  try{reloaded.start();assert.equal(reloaded.doc.querySelector('#recommendation').value,saved.recommendation);assert.equal(reloaded.calls.length,0);}finally{reloaded.close();}
 });
 
 test('AI failure keeps debrief and writing, then retry succeeds',async()=>{
@@ -251,18 +260,18 @@ test('completed AI response is saved while mission collection stays open',async(
     pending.resolve(reply({feedback}));await flush();
     assert.ok(h.doc.querySelector('.collection'),'request does not change navigation');
     assert.equal(h.savedRun().mentor.headline,feedback.headline);
-    h.click('#brand');h.click('[data-do="start"]');
-    assert.equal(h.savedRun().mentor,null,'explicit replay starts a fresh mission');
+    h.click('#brand');h.click('[data-do="surprise"]');
+    assert.equal(h.savedRun().mentor,null,'choosing a story from home starts a fresh mission');
   }finally{h.close();}
 });
 
-test('corrupt saved JSON and invalid save shapes fall back to a new mission',async()=>{
+test('corrupt saved JSON and invalid save shapes fall back to story selection',async()=>{
   for(const rawSave of ['not json',JSON.stringify({version:1,caseId:'koper',stage:99}),JSON.stringify({version:1,caseId:'koper',stage:5})]){
     const h=await open({rawSave});
     try{
-      assert.ok(h.doc.querySelector('.intro-shell'));
+      assert.ok(h.doc.querySelector('.welcome-shell'));
       assert.ok(!h.doc.querySelector('#reload'),'corrupt progress does not break startup');
-      h.click('[data-do="start"]');
+      h.click('[data-do="collection"]');h.click('[data-mission="koper"]');h.start();
       assert.equal(h.savedRun().stage,1);
       assert.equal(h.errors.length,0);
     }finally{h.close();}
@@ -284,7 +293,7 @@ test('invalid saved mentor is discarded while legitimate completed work survives
 test('blocked storage allows play and communicates the saving limitation',async()=>{
   const h=await open({noStorage:true});
   try{
-    h.click('[data-do="start"]');
+    h.click('[data-do="surprise"]');h.start();
     assert.ok(h.doc.querySelector('.desk'));
     assert.match(h.doc.querySelector('#toast').textContent,/cannot save/);
     assert.equal(h.errors.length,0);
@@ -310,7 +319,7 @@ test('soundtrack defaults on, loops at 30%, and continues through navigation',as
     assert.equal(h.doc.querySelector('#sound-button').getAttribute('aria-pressed'),'true');
     assert.equal(h.audio.paused,false);
     track.currentTime=12;
-    h.click('[data-do="start"]');
+    h.click('[data-do="surprise"]');h.start();
     h.click('[data-source="s1"]');
     assert.equal(h.audio.plays,1,'navigation and selections do not restart music');
     assert.equal(track.currentTime,12);
@@ -347,7 +356,7 @@ for(const gesture of ['pointerdown','keydown']){
       assert.equal(h.audio.paused,true);
       assert.equal(h.audio.plays,1);
       assert.equal(h.doc.querySelector('#sound-button').getAttribute('aria-pressed'),'true');
-      h.doc.querySelector('[data-do="start"]').dispatchEvent(new h.window.Event(gesture,{bubbles:true}));
+      h.doc.querySelector('#missions-button').dispatchEvent(new h.window.Event(gesture,{bubbles:true}));
       await flush();
       assert.equal(h.audio.paused,false);
       assert.equal(h.audio.plays,2);
@@ -375,7 +384,7 @@ test('source, answer, evidence and career controls follow their shuffled stable 
  const m=missions[0],saved=engine.freshRun(m,()=>0);const h=await open({saved});
  const ids=selector=>[...h.doc.querySelectorAll(selector)].map(button=>Object.values(button.dataset)[0]);
  try{
-  h.click('[data-do="start"]');assert.deepEqual(ids('[data-source]'),saved.orders.sources);assert.deepEqual(ids('[data-observation]'),saved.orders.question);
+  h.start();assert.deepEqual(ids('[data-source]'),saved.orders.sources);assert.deepEqual(ids('[data-observation]'),saved.orders.question);
   h.click('[data-source="s1"]');assert.deepEqual(ids('[data-source]'),saved.orders.sources);
   for(const source of m.sources)h.click(`[data-source="${source.id}"]`);
   h.click(`[data-observation="${best(m.question.options)}"]`);assert.deepEqual(ids('[data-observation]'),saved.orders.question);
@@ -395,5 +404,59 @@ test('source, answer, evidence and career controls follow their shuffled stable 
 
 test('older optional debriefs resume at the required contribution without automatically sending',async()=>{
  const saved=finished(missions[0],'Earlier draft.');delete saved.assessmentSubmitted;delete saved.orders.sources;delete saved.orders.careers;
- const h=await open({saved});try{h.click('[data-do="start"]');assert.ok(h.doc.querySelector('#briefing-form'));assert.equal(h.doc.querySelector('#recommendation').value,'Earlier draft.');assert.equal(h.calls.length,0);}finally{h.close();}
+ const h=await open({saved});try{h.start();assert.ok(h.doc.querySelector('#briefing-form'));assert.equal(h.doc.querySelector('#recommendation').value,'Earlier draft.');assert.equal(h.calls.length,0);}finally{h.close();}
+});
+
+
+test('a first visit offers story selection and a random assignment before any story begins',async()=>{
+ const h=await open();try{
+  assert.ok(h.doc.querySelector('.welcome-shell'));
+  assert.match(h.doc.querySelector('[data-do="collection"]').textContent,/Choose my story/);
+  assert.match(h.doc.querySelector('[data-do="surprise"]').textContent,/Choose randomly for me/);
+  assert.equal(h.doc.querySelector('.intro-shell'),null);
+  assert.equal(h.savedRun(),null,'no story is persisted before the player chooses');
+  assert.equal(h.calls.length,0);
+  h.click('[data-do="collection"]');
+  assert.equal(h.doc.querySelectorAll('[data-mission]').length,8);
+  h.click('[data-mission="water"]');
+  assert.ok(h.doc.querySelector('.intro-shell'));assert.equal(h.savedRun().caseId,'water');assert.equal(h.savedRun().stage,0);
+  h.start();assert.equal(h.savedRun().stage,1);
+ }finally{h.close();}
+});
+
+test('first-visit random assignment can select every one of the eight stories',async()=>{
+ for(const [index,m] of missions.entries()){
+  const h=await open({random:()=>(index+.5)/missions.length});try{
+   h.click('[data-do="surprise"]');
+   assert.equal(h.savedRun().caseId,m.id);assert.equal(h.savedRun().stage,0);assert.ok(h.doc.querySelector('.intro-shell'));
+   assert.equal(h.doc.querySelector('#modal').open,false);assert.equal(h.calls.length,0);
+  }finally{h.close();}
+ }
+});
+
+test('home keeps an unfinished briefing available and protects it when another story is chosen',async()=>{
+ const draft={...finished(missions[0],'Keep my written contribution.'),stage:4,assessmentSubmitted:false};
+ const h=await open({saved:draft,openAtStory:false});try{
+  h.click('#brand');assert.ok(h.doc.querySelector('.welcome-shell'));assert.ok(h.doc.querySelector('[data-do="resume"]'));
+  h.click('[data-do="resume"]');assert.equal(h.doc.querySelector('#recommendation').value,draft.recommendation);
+  h.click('#brand');h.click('[data-do="collection"]');h.click('[data-mission="water"]');
+  assert.equal(h.doc.querySelector('#modal').open,true);assert.equal(h.savedRun().caseId,draft.caseId);
+  h.click('[data-do="close-modal"]');h.click('#brand');h.click('[data-do="resume"]');
+  assert.equal(h.doc.querySelector('#recommendation').value,draft.recommendation);assert.equal(h.calls.length,0);
+ }finally{h.close();}
+});
+
+test('returning players also see story choices, with a direct link to their saved assessment',async()=>{
+ const saved=finished(missions[0]);saved.mentor={...feedback};saved.mentorKey=JSON.stringify(engine.mentorPayload(saved));
+ const h=await open({saved,openAtStory:false});try{
+  assert.ok(h.doc.querySelector('.welcome-shell'));assert.ok(h.doc.querySelector('[data-do="collection"]'));assert.ok(h.doc.querySelector('[data-do="surprise"]'));
+  h.click('[data-do="resume"]');assert.equal(h.doc.querySelector('.ai-response h3').textContent,feedback.headline);assert.equal(h.calls.length,0);
+ }finally{h.close();}
+});
+
+
+test('a random redraw avoids the story already chosen for the current briefing',async()=>{
+ const h=await open({saved:engine.freshRun(missions[0]),random:()=>0,openAtStory:false});try{
+  h.click('[data-do="surprise"]');assert.equal(h.savedRun().caseId,missions[1].id);
+ }finally{h.close();}
 });
