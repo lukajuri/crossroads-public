@@ -109,6 +109,22 @@ check(!crp_origin_allowed(['HTTP_SEC_FETCH_SITE' => 'cross-site']), 'cross-site 
 
 $feedback = ['judgement' => 'Your writing argues for keeping essential cargo moving, but could explain the safety constraint.', 'impact' => 'Targeted checks could protect workers while keeping essential deliveries moving; longer queues remain a cost. Separating the warning from the old image could reduce unjustified public alarm.', 'studyPath' => 'EMUNI’s MA in Mediterranean Geopolitics and Geoeconomics can help you develop this work. Research Methodology and Analytical Tools connects to checking evidence before advising a decision.', 'headline' => 'The connections behind your advice', 'strength' => 'You kept the warning separate from the old photograph.', 'nextStep' => 'Explain who bears the delay.', 'insideJob' => 'A risk analyst translates changing evidence into practical advice for an operations team.', 'nextQuestion' => 'What would make you pause more traffic?'];
 check(crp_feedback(response($feedback)) === $feedback, 'complete structured feedback');
+check(array_sum(CRP_FEEDBACK_WORD_LIMITS) === 150, 'total assessment budget includes headline and all seven body sections');
+check(str_contains($request['instructions'], 'maximum of 150 words across ALL eight values combined'), 'model receives the total word limit');
+$verbose = [];
+foreach (CRP_FEEDBACK_WORD_LIMITS as $field => $limit) {
+    $verbose[$field] = trim(str_repeat('word ', $limit + 5));
+}
+$bounded = crp_feedback(response($verbose));
+$total = 0;
+foreach (CRP_FEEDBACK_WORD_LIMITS as $field => $limit) {
+    $count = preg_match_all('/\S+/u', $bounded[$field]);
+    check($count === $limit, 'overlong model section is bounded: ' . $field);
+    $total += $count;
+}
+check($total === 150, 'overlong model reply is capped at exactly 150 words without dropping sections');
+check(crp_limit_words("Evidence\u{00A0}supports\u{2003}caution today", 3) === 'Evidence supports caution…', 'Unicode word separators are counted');
+check(crp_limit_words('A complete sentence.', 3) === 'A complete sentence.', 'text at the word boundary stays intact');
 rejects(fn () => crp_feedback(['status' => 'incomplete', 'output' => []]), RuntimeException::class, 'incomplete output');
 rejects(fn () => crp_feedback(['status' => 'completed', 'output' => [['type' => 'message', 'content' => [['type' => 'refusal', 'refusal' => 'Unavailable']]]]]), RuntimeException::class, 'refusal');
 $badFeedback = $feedback; unset($badFeedback['insideJob']);
