@@ -12,7 +12,7 @@ Installation for lukajuri.eu / cPanel
    Sound starts enabled, loops at 30% volume, and remembers the player's choice.
    Browsers that block autoplay start music on the first interaction.
 
-OPTIONAL AI MENTOR
+FINAL AI ASSESSMENT (SERVER SETUP REQUIRED)
 
 3. Create /home/margar38/crossroads-public-private OUTSIDE public_html.
    Upload the CONTENTS of this archive's crossroads-public-private/ folder
@@ -30,8 +30,17 @@ OPTIONAL AI MENTOR
 
 6. Open YOUR-GAME-URL/api/mentor.php?status=1.
    configured:true checks configuration, not OpenAI model access or billing.
-   Complete a mission and click Ask your AI mentor to test a real response.
-   A visible message stays on screen while feedback is being prepared.
+   Complete a mission, write a contribution and click Submit to your AI mentor.
+   Submission automatically sends the contribution and all recorded choices.
+   A visible message stays on screen while the assessment is being prepared.
+   Check that it discusses the writing, choices, possible impacts and MA path.
+
+UPDATING AN EXISTING INSTALLATION
+
+Replace the public files AND the private mentor.php in this release together.
+Keep your existing private config.php, API key and model. The new assessment
+uses eight response fields; the previous private mentor is incompatible.
+Older saved games keep their choices and return to the required writing step.
 
 If your host terminates HTTPS at a proxy, and a request gets rejected as a
 cross-origin request, add this setting in private config.php:

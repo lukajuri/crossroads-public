@@ -23,17 +23,17 @@ The [cPanel download](dist/crossroads-cpanel.zip) contains public game files, a 
 | The Grain Shadow | Distinguish available stocks from food that can reach households |
 | The Lahore File | Separate established identities and conduct from unproven sponsorship |
 
-Each mission includes three sources, a source judgement, three response branches with costs, new evidence, a guided briefing and three professional perspectives. Written recommendations and AI mentoring are optional. Fictional scenarios use real geographic settings; the game never presents invented incidents as news. [Scenario notes](docs/SCENARIOS.md).
+Each mission includes three sources, a source judgement, three response branches with costs, new evidence, a guided briefing and three professional perspectives. A written contribution is required at the end. Submitting it automatically requests an AI assessment of the player’s choices, reasoning and possible impact, with a connection to professional practice and EMUNI’s MA in Mediterranean Geopolitics and Geoeconomics. Fictional scenarios use real geographic settings; the game never presents invented incidents as news. [Scenario notes](docs/SCENARIOS.md).
 
 ## Design and behaviour
 
 - Navy #01153E cinematic openings with eight original scene illustrations, warm reading cards, restrained gold and teal feedback.
 - Responsive phone, tablet and desktop layouts; tap controls, keyboard access, reduced-motion support and a looping soundtrack at 30% volume. Sound starts enabled and remembers the player’s choice; browsers that block autoplay begin music on the first interaction.
 - A geographic locator based on Natural Earth coastlines, plus all eight locations to explore.
-- Independent device-local progress, shuffled choices kept stable within each run, restart confirmation and briefing export.
+- Independent device-local progress, all answer, source, evidence and career choices shuffled independently and kept stable within each run, restart confirmation and briefing export.
 - Every answer gives feedback and permits progress. No countdown or career aptitude score.
-- Optional AI mentor connects recorded choices and writing to a selected professional perspective. Feedback uses a separate PHP endpoint and the server's configured model. All authored feedback remains available when AI is unavailable.
-- Programme connections use verified course titles from [EMUNI's MA in Geopolitics and Geoeconomics](https://emuni.si/mgg/).
+- The final AI assessment considers the source judgement, both attached sources, recommendation, updated judgement and required writing together. It explains possible impacts and trade-offs, practical professional tasks, and a route to developing these skills through the MA. It uses a separate PHP endpoint and the server’s configured model. If AI is unavailable, the submission is saved and an explicit retry stays available alongside authored mission reflections.
+- Programme connections use verified course titles from [EMUNI's MA in Mediterranean Geopolitics and Geoeconomics](https://emuni.si/mgg/).
 
 ## Development
 
@@ -49,7 +49,7 @@ php tests/mentor-test.php
 
 `data/missions.json` is the canonical content. `npm run build` refreshes its public copy and packages the cPanel ZIP. Server deployment uses the same canonical data in the private directory. Do not edit the two deployed JSON copies independently.
 
-`public/api/mentor.php` is the only publicly served PHP file. `server/mentor.php` and `config.php` belong in `/home/margar38/crossroads-public-private`, with `missions.json`. The example config reads only the key and model from the existing classroom private configuration. No credentials are shipped or committed. The complete authored game also works on static hosting; PHP is required for AI mentoring.
+`public/api/mentor.php` is the only publicly served PHP file. `server/mentor.php` and `config.php` belong in `/home/margar38/crossroads-public-private`, with `missions.json`. The example config reads only the key and model from the existing classroom private configuration. No credentials are shipped or committed. Static hosting serves the authored missions and reflections; the final AI assessment requires the PHP endpoint and private configuration.
 
 The AI mentor uses the OpenAI Responses API with strict structured output, canonical server-owned mission data, `store:false`, private caching and request limits. Tests use mock responses; a live response must be tested after installation with the owner's server configuration.
 

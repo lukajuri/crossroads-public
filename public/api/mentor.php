@@ -66,7 +66,7 @@ try {
     $result = crp_run($submission, $config, $private, (string) ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
     crp_reply(200, ['configured' => true] + $result);
 } catch (InvalidArgumentException $error) {
-    crp_reply(400, ['message' => 'Complete your mission choices and keep your recommendation under 1,200 characters.']);
+    crp_reply(400, ['message' => 'Complete your mission choices and write your own contribution (up to 1,200 characters).']);
 } catch (OverflowException $error) {
     header('Retry-After: 30');
     crp_reply(429, ['message' => $error->getMessage()]);

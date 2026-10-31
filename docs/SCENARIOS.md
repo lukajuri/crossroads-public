@@ -2,7 +2,7 @@
 
 The eight missions are fictional training scenarios set in real places. All incident details, operational records, schedules, statements and case evidence are authored for play. They do not report actual plots, legal proceedings, outages, shortages or agreements. No named real person or organisation is accused of wrongdoing. There is no claim that a mission describes present-day conditions at a port, border or river intake.
 
-The missions adapt the topics of the classroom Operation Crossroads game into a short experience requiring no previous study of geopolitics. A player examines three sources, distinguishes an observation from an inference, advises a decision-maker, updates the advice after new evidence and constructs a short briefing. The responses are authored possibilities, not forecasts. Several response plans can be defensible; the preferred plan fits the specific evidence supplied.
+The missions adapt the topics of the classroom Operation Crossroads game into a short experience requiring no previous study of geopolitics. A player examines three sources, distinguishes an observation from an inference, advises a decision-maker, updates the advice after new evidence and writes a required short briefing. Submission automatically sends the recorded judgements, attached sources and written contribution to the AI mentor for a final assessment. The assessment explains possible impacts and connects professional analytical work to the MA. The responses are authored possibilities, not forecasts. Several response plans can be defensible; the preferred plan fits the specific evidence supplied.
 
 | Mission | Key distinction | Work introduced |
 |---|---|---|
@@ -17,7 +17,7 @@ The missions adapt the topics of the classroom Operation Crossroads game into a 
 
 The Neretva case uses invented operating conditions and does not represent a legal allocation or an actual bilateral agreement. The Lahore case omits individual names. The corridor case specifies a fictional permission sequence rather than asserting an actual border protocol.
 
-Career reflections illustrate tasks and attractive aspects of work. They do not assess personal aptitude, promise employment or imply that the MA alone guarantees a particular role. AI mentoring should remain bounded by the authored evidence, describe uncertainty and offer encouragement tied to an observable player decision.
+Career reflections illustrate tasks and attractive aspects of work. They do not assess personal aptitude, promise employment or imply that the MA alone guarantees a particular role. The final AI assessment must consider both recorded choices and the player’s written contribution. Its MA study connection must use the supplied programme name and course titles, without inventing admissions facts. AI mentoring should remain bounded by the authored evidence, describe uncertainty and offer encouragement tied to an observable player decision.
 
 ## Programme source
 

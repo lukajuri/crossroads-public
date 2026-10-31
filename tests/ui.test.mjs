@@ -23,12 +23,15 @@ const reply = (data, status=200, type='application/json') => ({ok:status>=200&&s
 const feedback = {
   headline:'The connections behind your advice',
   strength:'You checked the evidence before drawing a conclusion.',
+  judgement:'Your contribution gives a practical reason for keeping essential traffic moving.',
+  impact:'A targeted hold could protect workers while allowing essential deliveries. Your source judgement also avoids spreading an unverified claim.',
+  studyPath:'Explore EMUNI’s MA in Mediterranean Geopolitics and Geoeconomics. Research Methodology and Analytical Tools can develop the evidence skills behind this work.',
   nextStep:'Explain who bears the cost of a delay.',
   insideJob:'A risk analyst turns changing information into advice an operations team can use.',
   nextQuestion:'Which new observation would change your recommendation?',
 };
 function finished(m, recommendation='A cautious recommendation.') {
-  return {...engine.freshRun(m,()=>.5),stage:5,read:m.sources.map(s=>s.id),observationId:best(m.question.options),observationSubmitted:true,actionId:best(m.choices),evidenceIds:m.sources.slice(0,2).map(s=>s.id),decisionSubmitted:true,updateId:best(m.development.options),updateSubmitted:true,recommendation};
+  return {...engine.freshRun(m,()=>.5),stage:5,read:m.sources.map(s=>s.id),observationId:best(m.question.options),observationSubmitted:true,actionId:best(m.choices),evidenceIds:m.sources.slice(0,2).map(s=>s.id),decisionSubmitted:true,updateId:best(m.development.options),updateSubmitted:true,recommendation,assessmentSubmitted:true};
 }
 
 async function open({saved, rawSave, onMentor, noStorage=false, dataFailure=false, settings, blockAutoplay=false}={}) {
@@ -66,16 +69,16 @@ async function open({saved, rawSave, onMentor, noStorage=false, dataFailure=fals
   };
   window.__engine=engine;
   window.__landPath=landPath;
-  const executable=source.replace(/import\s*\{landPath\}\s*from\s*['"]\.\/assets\/land-path\.js['"];?/, 'const landPath=window.__landPath;').replace(/import\s*\{([^}]+)\}\s*from\s*['"]\.\/engine\.js['"];?/,(_,names)=>`const {${names.replace(/\s+as\s+/g,':')}}=window.__engine;`);
+  const executable=source.replace(/import\s*\{landPath\}\s*from\s*['"]\.\/assets\/land-path\.js['"];?/, 'const landPath=window.__landPath;').replace(/import\s*\{([^}]+)\}\s*from\s*['"]\.\/engine\.js(?:\?v=\d+)?['"];?/,(_,names)=>`const {${names.replace(/\s+as\s+/g,':')}}=window.__engine;`);
   window.eval(executable+'\n//# sourceURL=crossroads-app-runtime-test.js');
   await flush();
   const click=selector=>{const element=doc.querySelector(selector);assert.ok(element,`control exists: ${selector}`);assert.notEqual(element.disabled,true,`control enabled: ${selector}`);element.click();return element;};
   const savedRun=()=>JSON.parse(window.localStorage.getItem(engine.SAVE_KEY));
-  const ask=()=>{click('[data-do="mentor-consent"]');assert.equal(doc.querySelector('#modal').open,true);click('[data-do="consent-mentor"]');};
+  const ask=()=>click('[data-do="ask-mentor"]');
   return {dom,window,doc,calls,errors,timers,audio,click,ask,savedRun,close:()=>dom.window.close()};
 }
 
-async function completeMission(h,m,{recommendation=''}={}) {
+async function completeMission(h,m,{recommendation='I would check the evidence and keep essential deliveries moving.'}={}) {
   h.click('[data-do="start"]');
   assert.ok(h.doc.querySelector('[data-do="check-observation"]').disabled,'initial evidence gate');
   for(const s of m.sources)h.click(`[data-source="${s.id}"]`);
@@ -91,53 +94,81 @@ async function completeMission(h,m,{recommendation=''}={}) {
   h.click('[data-do="to-briefing"]');
   const input=h.doc.querySelector('#recommendation');
   input.value=recommendation;input.dispatchEvent(new h.window.Event('input',{bubbles:true}));
-  h.click('[data-do="finish"]');
+  h.click('#submit-briefing');
   assert.ok(h.doc.querySelector('.debrief'),'completed debrief rendered');
   assert.equal(h.savedRun().stage,5);
   assert.equal(h.savedRun().recommendation,recommendation);
 }
 
 for(const m of missions){
-  test(`DOM mission completes with optional writing: ${m.id}`,async()=>{
+  test(`DOM mission submits writing and automatically requests an assessment: ${m.id}`,async()=>{
     const h=await open({saved:engine.freshRun(m,()=>.5)});
     try{
       await completeMission(h,m,{recommendation:'Consider the evidence and affected people.'});
-      assert.equal(h.calls.length,0,'AI never required to finish');
+      assert.equal(h.calls.length,1,'final submission automatically requests AI');
+      assert.deepEqual(h.calls[0].payload,engine.mentorPayload(h.savedRun()));
+      await flush();
+      assert.ok(h.doc.querySelector('.ai-response'));
+      assert.match(h.doc.querySelector('.ai-response').textContent,/written judgement|decisions matter/);
+      assert.match(h.doc.querySelector('.ai-response').textContent,/Mediterranean Geopolitics and Geoeconomics/);
       assert.equal(h.doc.querySelectorAll('.career-tab').length,3);
       assert.equal(h.errors.length,0);
     }finally{h.close();}
   });
 }
 
-test('AI consent, waiting, safe success rendering and cached reload',async()=>{
-  const pending=deferred(),malicious={...feedback,headline:'<img src=x onerror="window.injected=true">',insideJob:'<script>window.injected=true</script>'};
-  const h=await open({saved:finished(missions[0]),onMentor:()=>pending.promise});
+test('informed submission starts one request, shows waiting and safely restores the full assessment',async()=>{
+  const pending=deferred(),malicious={...feedback,headline:'<img src=x onerror="window.injected=true">',judgement:'<script>window.injected=true</script>'};
+  const savedDraft={...finished(missions[0]),stage:4,assessmentSubmitted:false};
+  const h=await open({saved:savedDraft,onMentor:()=>pending.promise});
   let saved;
   try{
-    assert.equal(h.calls.length,0);
-    h.click('[data-do="mentor-consent"]');
-    assert.equal(h.calls.length,0,'opening consent makes no AI request');
-    h.click('[data-do="consent-mentor"]');
+    assert.match(h.doc.querySelector('.intro-assessment').textContent,/sent to your AI mentor/);
+    h.click('[data-do="start"]');
+    assert.equal(h.calls.length,0,'viewing and writing never sends data');
+    assert.match(h.doc.querySelector('#submission-notice').textContent,/OpenAI/);
+    assert.equal(h.doc.querySelector('#recommendation').required,true);
+    h.click('#submit-briefing');
+    assert.equal(h.doc.querySelector('#modal').open,false,'no second opt-in dialog');
     assert.equal(h.doc.querySelector('.wait').getAttribute('aria-busy'),'true');
-    assert.equal(h.doc.querySelector('[data-do="mentor-consent"]').disabled,true);
+    assert.equal(h.doc.querySelector('#submit-briefing'),null,'submission form replaced');
     assert.equal(h.calls.length,1);
     assert.equal(h.calls[0].payload.recommendation,'A cautious recommendation.');
+    assert.deepEqual(h.calls[0].payload.evidenceIds,savedDraft.evidenceIds);
     pending.resolve(reply({feedback:malicious}));await flush();
     assert.equal(h.doc.querySelector('.wait'),null);
     assert.equal(h.doc.querySelector('.ai-response h3').textContent,malicious.headline);
     assert.equal(h.doc.querySelector('.ai-response script'),null);
     assert.equal(h.doc.querySelector('.ai-response img'),null);
     assert.equal(h.window.injected,undefined);
-    saved=h.savedRun();
-    assert.deepEqual(saved.mentor,malicious);
+    saved=h.savedRun();assert.deepEqual(saved.mentor,malicious);
   }finally{h.close();}
   const reloaded=await open({saved});
   try{
     assert.equal(reloaded.doc.querySelector('.ai-response h3').textContent,malicious.headline);
-    reloaded.click('[data-do="mentor-consent"]');
-    assert.equal(reloaded.calls.length,0,'saved same-payload feedback reused');
-    assert.equal(reloaded.doc.querySelector('#modal').open,false,'cached feedback needs no resend');
+    assert.equal(reloaded.calls.length,0,'saved assessment is restored without sending again');
   }finally{reloaded.close();}
+});
+
+test('blank and whitespace-only writing cannot be submitted; a draft survives reload',async()=>{
+  const draft={...finished(missions[0],''),stage:4,assessmentSubmitted:false};
+  const h=await open({saved:draft});let saved;
+  try{
+    h.click('[data-do="start"]');
+    const input=h.doc.querySelector('#recommendation'),button=h.doc.querySelector('#submit-briefing');
+    assert.equal(button.disabled,true);
+    for(const value of ['   ', '\n\t', '\u00a0']){
+      input.value=value;input.dispatchEvent(new h.window.Event('input',{bubbles:true}));
+      assert.equal(button.disabled,true);
+      h.doc.querySelector('#briefing-form').dispatchEvent(new h.window.Event('submit',{bubbles:true,cancelable:true}));
+      assert.equal(h.calls.length,0);assert.equal(h.savedRun().stage,4);
+    }
+    input.value='I would investigate the warning while protecting essential deliveries.';
+    input.dispatchEvent(new h.window.Event('input',{bubbles:true}));
+    assert.equal(button.disabled,false);assert.equal(h.calls.length,0);saved=h.savedRun();
+  }finally{h.close();}
+  const reloaded=await open({saved});
+  try{reloaded.click('[data-do="start"]');assert.equal(reloaded.doc.querySelector('#recommendation').value,saved.recommendation);assert.equal(reloaded.calls.length,0);}finally{reloaded.close();}
 });
 
 test('AI failure keeps debrief and writing, then retry succeeds',async()=>{
@@ -182,22 +213,19 @@ test('AI timeout aborts once and preserves the completed briefing',async()=>{
   }finally{h.close();}
 });
 
-test('career change cancels pending AI and ignores a late old-perspective response',async()=>{
-  const old=deferred(),fresh=deferred();
-  const h=await open({saved:finished(missions[0]),onMentor:(options,calls)=>calls.length===1?old.promise:fresh.promise});
+test('career browsing keeps the submitted assessment pending without cancelling or resending',async()=>{
+  const pending=deferred();
+  const h=await open({saved:finished(missions[0]),onMentor:()=>pending.promise});
   try{
-    h.ask();
-    const newCareer=missions[0].careers[1];
-    h.click(`[data-career="${newCareer.id}"]`);
-    assert.equal(h.calls[0].signal.aborted,true);
-    assert.equal(h.doc.querySelector('.wait'),null);
-    old.resolve(reply({feedback:{...feedback,headline:'Stale response'}}));await flush();
-    assert.equal(h.doc.querySelector('.ai-response'),null);
+    h.ask();const payload=h.calls[0].payload;
+    const newCareer=missions[0].careers[1];h.click(`[data-career="${newCareer.id}"]`);
+    assert.equal(h.calls[0].signal.aborted,false);
+    assert.ok(h.doc.querySelector('.wait'));
+    pending.resolve(reply({feedback}));await flush();
+    assert.equal(h.doc.querySelector('.ai-response h3').textContent,feedback.headline);
     assert.equal(h.savedRun().perspective,newCareer.id);
-    assert.equal(h.savedRun().mentor,null);
-    h.ask();fresh.resolve(reply({feedback:{...feedback,headline:'A different professional view'}}));await flush();
-    assert.equal(h.doc.querySelector('.ai-response h3').textContent,'A different professional view');
-    assert.equal(h.calls[1].payload.perspective,newCareer.id);
+    assert.deepEqual(engine.mentorPayload(h.savedRun()),payload);
+    assert.equal(h.calls.length,1);
   }finally{h.close();}
 });
 
@@ -242,7 +270,7 @@ test('corrupt saved JSON and invalid save shapes fall back to a new mission',asy
 });
 
 test('invalid saved mentor is discarded while legitimate completed work survives',async()=>{
-  for(const mentor of [{...feedback,strength:''},{...feedback,extra:'Unexpected'}, {...feedback,insideJob:'x'.repeat(701)}]){
+  for(const mentor of [{...feedback,strength:''},{...feedback,extra:'Unexpected'}, {...feedback,insideJob:'x'.repeat(601)}]){
     const saved=finished(missions[0]);saved.mentor=mentor;saved.mentorKey=JSON.stringify(engine.mentorPayload(saved));
     const h=await open({saved});
     try{
@@ -341,4 +369,31 @@ test('turning sound off after blocked autoplay never briefly starts the track',a
     assert.equal(h.audio.paused,true);
     assert.equal(h.errors.length,0);
   }finally{h.close();}
+});
+
+test('source, answer, evidence and career controls follow their shuffled stable ID orders',async()=>{
+ const m=missions[0],saved=engine.freshRun(m,()=>0);const h=await open({saved});
+ const ids=selector=>[...h.doc.querySelectorAll(selector)].map(button=>Object.values(button.dataset)[0]);
+ try{
+  h.click('[data-do="start"]');assert.deepEqual(ids('[data-source]'),saved.orders.sources);assert.deepEqual(ids('[data-observation]'),saved.orders.question);
+  h.click('[data-source="s1"]');assert.deepEqual(ids('[data-source]'),saved.orders.sources);
+  for(const source of m.sources)h.click(`[data-source="${source.id}"]`);
+  h.click(`[data-observation="${best(m.question.options)}"]`);assert.deepEqual(ids('[data-observation]'),saved.orders.question);
+  h.click('[data-do="check-observation"]');h.click('[data-do="to-decide"]');
+  assert.deepEqual(ids('[data-action]'),saved.orders.actions);assert.deepEqual(ids('[data-evidence]'),saved.orders.sources);
+  h.click(`[data-action="${best(m.choices)}"]`);assert.deepEqual(ids('[data-action]'),saved.orders.actions);
+  for(const source of m.sources.slice(0,2))h.click(`[data-evidence="${source.id}"]`);
+  h.click('[data-do="send-advice"]');h.click('[data-do="to-update"]');assert.deepEqual(ids('[data-update]'),saved.orders.updates);
+  h.click(`[data-update="${best(m.development.options)}"]`);h.click('[data-do="check-update"]');h.click('[data-do="to-briefing"]');
+  const input=h.doc.querySelector('#recommendation');input.value='I would check the evidence before attributing responsibility.';input.dispatchEvent(new h.window.Event('input',{bubbles:true}));h.click('#submit-briefing');await flush();
+  assert.deepEqual(ids('[data-career]'),saved.orders.careers);
+  assert.equal(h.calls[0].payload.observationId,best(m.question.options));
+  assert.equal(h.calls[0].payload.actionId,best(m.choices));
+  assert.equal(h.calls[0].payload.updateId,best(m.development.options));
+ }finally{h.close();}
+});
+
+test('older optional debriefs resume at the required contribution without automatically sending',async()=>{
+ const saved=finished(missions[0],'Earlier draft.');delete saved.assessmentSubmitted;delete saved.orders.sources;delete saved.orders.careers;
+ const h=await open({saved});try{h.click('[data-do="start"]');assert.ok(h.doc.querySelector('#briefing-form'));assert.equal(h.doc.querySelector('#recommendation').value,'Earlier draft.');assert.equal(h.calls.length,0);}finally{h.close();}
 });
