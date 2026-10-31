@@ -26,11 +26,11 @@ test('the complete set of eight distinct missions is available, including the in
 
 for (const mission of missions) {
   test(`${mission.id}: a novice receives a concise assignment, sources and an achievable briefing`, () => {
-    for (const key of ['title', 'kicker', 'location', 'category', 'role', 'teaser', 'assignment', 'supervisor', 'briefingPrompt', 'takeaway']) {
+    for (const key of ['title', 'kicker', 'location', 'category', 'role', 'teaser', 'openingBrief', 'assignment', 'supervisor', 'briefingPrompt', 'takeaway']) {
       assert.equal(typeof mission[key], 'string', key);
       assert.ok(mission[key].trim(), key);
     }
-    for (const [key, limit] of [['teaser', 20], ['assignment', 60], ['supervisor', 35]]) {
+    for (const [key, limit] of [['teaser', 20], ['openingBrief', 65], ['assignment', 60], ['supervisor', 35]]) {
       assert.ok(words(mission[key]) <= limit, `${key} exceeds ${limit} words`);
     }
     assert.equal(mission.coordinates.length, 2);

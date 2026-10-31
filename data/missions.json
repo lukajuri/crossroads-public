@@ -11,6 +11,7 @@
     "category": "Security & trade",
     "role": "Geopolitical risk analyst",
     "teaser": "A credible warning reaches a busy port. Help protect people without bringing essential trade to a standstill.",
+    "openingBrief": "A credible warning has put the Port of Koper on alert. Residents demand answers while essential deliveries face disruption. The port authority is waiting for your unit to connect the security, public communication and trade picture. Your mission: help protect people, support the investigation and keep authorised traffic moving.",
     "assignment": "Investigators have uncovered a possible drone attack on the Port of Koper. No attack has occurred. A safety hold is in place in one area, and an angry crowd wants answers. Your team needs advice on the investigation, public communication and traffic.",
     "supervisor": "Start with what we can establish. Then recommend a practical next step. You do not have to solve the whole crisis.",
     "stakes": [
@@ -165,6 +166,7 @@
     "category": "Information & influence",
     "role": "Information analyst",
     "teaser": "A convincing port announcement spreads online. Discover what was changed, who amplified it and why people believe it.",
+    "openingBrief": "A port notice is spreading through Alexandria. Traders cancel bookings and angry residents want answers. Officials need your unit to establish what is true before the confusion causes more disruption. Your mission: uncover the manipulation, recommend a credible public response and keep real delivery problems in view.",
     "assignment": "A notice carrying a port seal claims food imports will stop for a month. Traders cancel bookings, and residents are angry. The original concerns office opening hours. Your team must correct the manipulation while taking real delivery problems seriously.",
     "supervisor": "Look at the original before the reactions. A false notice does not mean every complaint is false.",
     "stakes": [
@@ -319,6 +321,7 @@
     "category": "Resources & negotiation",
     "role": "Resources and negotiation adviser",
     "teaser": "Help two countries share a river when drinking water, farming and electricity need it at different times.",
+    "openingBrief": "Talks over the Neretva’s water-release schedule have reached a deadlock. Power planners, farmers and drinking-water users need the same river at different times. Both sides are waiting for your unit to connect their conflicting records. Your mission: find a workable agreement and explain who must accept a cost.",
     "assignment": "An upstream energy team in Bosnia and Herzegovina and downstream users in Croatia disagree about a water-release schedule. The daily total looks sufficient, yet a drinking-water intake struggles during low-flow hours. Your job is to find a workable next agreement.",
     "supervisor": "Ask when water is needed, not just how much. A good arrangement must be practical for both sides.",
     "stakes": [
@@ -473,6 +476,7 @@
     "category": "Trade & logistics",
     "role": "Trade and logistics adviser",
     "teaser": "A canal stoppage turns one route into many difficult choices. Decide which deliveries need attention first.",
+    "openingBrief": "A system failure has stopped a Suez convoy. Ships are waiting while refrigerated food and factory components face uncertain deliveries. Operators need your unit’s assessment before choosing between waiting and a long detour. Your mission: identify the most exposed cargo and recommend a workable next move.",
     "assignment": "A navigation-system failure has stopped a Suez convoy. Ships linking the Mediterranean and Indian Ocean are waiting. Your client carries refrigerated food and factory components. Compare waiting with a longer route, then explain whose delivery is most exposed.",
     "supervisor": "A route can be open and still be too slow for a particular shipment. Look at the cargo, not just the line on the map.",
     "stakes": [
@@ -627,6 +631,7 @@
     "category": "Borders & business",
     "role": "Cross-border policy adviser",
     "teaser": "Trucks can reach the next border, but their paperwork cannot. Find the missing connection.",
+    "openingBrief": "Refrigerated cherries are waiting at a border handover. The roads and storage are available, but the agencies’ paperwork does not connect. The longer the dispute lasts, the more the shipment is at risk. Your unit must break the deadlock: identify the missing connection and propose a lawful way forward.",
     "assignment": "A trade corridor links Mediterranean ports with Türkiye, Iran, Afghanistan and South Asia. Refrigerated cherries wait at a handover because three agencies use different shipment identifiers. Roads and storage space are available. Your team must make the connection work.",
     "supervisor": "Sometimes the missing link is an agreement, not a bridge. Follow the handover and find who needs to recognise what.",
     "stakes": [
@@ -781,6 +786,7 @@
     "category": "Digital connections",
     "role": "Digital risk analyst",
     "teaser": "An outage interrupts cargo tracking and sparks claims of an attack. Restore a useful picture before repeating the headline.",
+    "openingBrief": "Cargo trackers have gone quiet across an international network. Claims of an attack are spreading faster than verified information. Shipping companies need your unit’s judgement before interrupting services that may still work. Your mission: establish what has failed, protect essential services and explain what remains unknown about the cause.",
     "assignment": "Connected services fail across a network linking Europe, North Africa and the Indian Ocean. Some cargo trackers stop updating while local refrigeration still runs. An unverified graphic calls it an attack. Advise on keeping services working and explaining what is known.",
     "supervisor": "Two questions: what stopped working, and why? You can act on the first while the second is still being investigated.",
     "stakes": [
@@ -935,6 +941,7 @@
     "category": "Food & livelihoods",
     "role": "Food-security policy analyst",
     "teaser": "The grain total looks reassuring. Families still face rising prices. Find what the headline number misses.",
+    "openingBrief": "The stock reports say there is enough grain. Yet families in Tunis and Amman face higher prices and smaller shopping baskets. Officials are under pressure to act, but the headline totals offer no clear answer. Your unit must trace the missing connection between warehouses and households, then recommend a practical intervention.",
     "assignment": "Regional grain stocks appear sufficient for the next delivery cycle. Yet retailers in Tunis and Amman are selling smaller baskets at higher prices. Your team has warehouse, approval and delivery records. Explain how food can be available but hard to reach.",
     "supervisor": "Follow the grain to the household. A stock total is a useful starting point, not the end of the story.",
     "stakes": [
@@ -1089,6 +1096,7 @@
     "category": "Diplomacy & evidence",
     "role": "Diplomatic risk adviser",
     "teaser": "An espionage case is uncovered in Punjab. Help separate proven conduct from wider accusations before the crisis spreads.",
+    "openingBrief": "An espionage case in Punjab has triggered demands for wider restrictions. Verified evidence and unproven accusations are becoming tangled, while unrelated exporters fear disruption. Officials need your unit’s assessment before the crisis spreads. Your mission: protect the investigation, distinguish proven conduct from claims about sponsors and recommend a proportionate response.",
     "assignment": "A judicial case summary in Lahore identifies two foreign consultants in an unauthorised transfer of restricted documents. Their identities and conduct are corroborated; government direction is not established. A leaked list prompts demands for wider restrictions as unrelated exporters fear disruption.",
     "supervisor": "Be precise about what each record proves. Protecting the investigation and keeping diplomacy workable can be part of the same recommendation.",
     "stakes": [
