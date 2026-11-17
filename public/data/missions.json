@@ -152,7 +152,11 @@
       "Research Methodology and Analytical Tools",
       "International Trade, Logistics and Transport"
     ],
-    "takeaway": "Good advice can protect people, preserve useful connections and admit what remains unknown."
+    "takeaway": "Good advice can protect people, preserve useful connections and admit what remains unknown.",
+    "videos": {
+      "opening": "assets/videos/koper-opening.mp4",
+      "closing": "assets/videos/koper-closing.mp4"
+    }
   },
   {
     "id": "fimi",
@@ -1237,6 +1241,10 @@
       "Research Methodology and Analytical Tools",
       "Global Balance of Power and Spheres of Influence"
     ],
-    "takeaway": "Precision about responsibility can strengthen an investigation and keep its consequences proportionate."
+    "takeaway": "Precision about responsibility can strengthen an investigation and keep its consequences proportionate.",
+    "videos": {
+      "opening": "assets/videos/punjab-opening.mp4",
+      "closing": "assets/videos/punjab-closing.mp4"
+    }
   }
 ]
