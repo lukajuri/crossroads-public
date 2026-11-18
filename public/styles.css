@@ -36,3 +36,4 @@ dialog{border:1px solid #c9cfc7;border-radius:12px;padding:40px;max-width:560px;
 
 /* Optional cinematic scenes */
 .video-dialog{width:min(92vw,960px);max-width:960px;max-height:94dvh;overflow:auto;border:1px solid rgba(234,198,138,.5);border-radius:18px;padding:clamp(16px,3vw,28px);background:#01153e;color:#fff;box-shadow:0 22px 80px #0009}.video-dialog::backdrop{background:rgba(0,8,23,.88)}.video-dialog h2{font-family:var(--title);font-size:clamp(1.2rem,4vw,1.8rem);margin:0 0 14px}.video-dialog video{display:block;width:100%;max-height:65dvh;aspect-ratio:16/9;object-fit:contain;background:#000;border-radius:10px}.video-dialog p{font-size:.9rem;line-height:1.5;color:#d9e1ec}.video-dialog .video-continue{margin-top:4px;min-height:48px}.video-dialog video:focus-visible,.video-dialog button:focus-visible{outline:3px solid #eac68a;outline-offset:3px}
+.video-dialog video + p{margin-top:10px}
