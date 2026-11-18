@@ -13,7 +13,7 @@ export function createVideoPlayer({soundtrack, soundEnabled, resumeSound}) {
     resumeSound();
   }
   function playing() { return Boolean(active && !active.video.paused && !active.video.ended); }
-  function playClip(path, title, stillCurrent, buttonText = 'Continue to the briefing') {
+  function playClip(path, title, stillCurrent, buttonText = 'Continue to the briefing', introduction = 'A geopolitical crisis unfolds. Can your decisions shape events?') {
     cancel();
     // Only local MP4 assets specified by the game are accepted.
     if (typeof path !== 'string' || !/^assets\/videos\/[a-z0-9-]+\.mp4$/.test(path)) return;
@@ -34,7 +34,7 @@ export function createVideoPlayer({soundtrack, soundEnabled, resumeSound}) {
       dialog.className = 'video-dialog';
       dialog.setAttribute('aria-label', title);
       const heading = document.createElement('h2'); heading.textContent = title;
-      const note = document.createElement('p'); note.textContent = 'A geopolitical crisis unfolds. Can your decisions shape events?';
+      const note = document.createElement('p'); note.textContent = introduction;
       const close = document.createElement('button'); close.type='button'; close.className='primary video-continue'; close.textContent=buttonText;
       dialog.append(heading, video, note, close); document.body.append(dialog);
       active = {dialog, video};

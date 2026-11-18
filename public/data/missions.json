@@ -155,7 +155,9 @@
     "takeaway": "Good advice can protect people, preserve useful connections and admit what remains unknown.",
     "videos": {
       "opening": "assets/videos/koper-opening.mp4",
-      "closing": "assets/videos/koper-closing.mp4"
+      "closing": "assets/videos/koper-closing.mp4",
+      "openingText": "An urgent warning has put the Port of Koper on alert. People need protection, rumours are spreading and vital deliveries could be disrupted. Decision-makers are waiting for your unit's advice. Can you uncover what is happening and find a way forward?",
+      "closingText": "The warning at Koper has brought security, public trust and international trade into the same urgent picture. Your briefing is now with the team. What impact might your choices have on the investigation, the port and the people who depend on it?"
     }
   },
   {
@@ -1244,7 +1246,9 @@
     "takeaway": "Precision about responsibility can strengthen an investigation and keep its consequences proportionate.",
     "videos": {
       "opening": "assets/videos/punjab-opening.mp4",
-      "closing": "assets/videos/punjab-closing.mp4"
+      "closing": "assets/videos/punjab-closing.mp4",
+      "openingText": "A sensitive espionage case in Punjab has raised difficult questions. Evidence and accusations are becoming tangled, while businesses and officials fear the consequences. Your advisory unit must help make sense of the case. Can you uncover the truth without allowing suspicion to spiral?",
+      "closingText": "The Lahore case has shown how quickly an investigation can affect diplomacy, business and public trust. Your briefing has reached the decision-makers, but important questions remain. How might your choices shape the response, and what should your team investigate next?"
     }
   }
 ]
