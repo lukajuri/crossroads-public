@@ -1,5 +1,5 @@
 import {landPath} from './assets/land-path.js';
-import {createVideoPlayer} from './video.js?v=20261117';
+import {createVideoPlayer} from './video.js?v=20261118';
 import {SAVE_KEY, SETTINGS_KEY, PROGRESS_KEY, freshRun, validateRun, pickNext, mentorPayload, insight, hasContribution, validFeedback, escapeHTML as e} from './engine.js?v=20261031';
 const $ = s => document.querySelector(s);
 const main = $('#main');

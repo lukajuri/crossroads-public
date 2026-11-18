@@ -34,7 +34,7 @@ export function createVideoPlayer({soundtrack, soundEnabled, resumeSound}) {
       dialog.className = 'video-dialog';
       dialog.setAttribute('aria-label', title);
       const heading = document.createElement('h2'); heading.textContent = title;
-      const note = document.createElement('p'); note.textContent = 'A fictional scenario. This clip sets the scene; your choices shape the briefing.';
+      const note = document.createElement('p'); note.textContent = 'A geopolitical crisis unfolds. Can your decisions shape events?';
       const close = document.createElement('button'); close.type='button'; close.className='primary video-continue'; close.textContent=buttonText;
       dialog.append(heading, video, note, close); document.body.append(dialog);
       active = {dialog, video};
